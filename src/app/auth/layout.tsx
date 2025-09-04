@@ -7,7 +7,7 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative min-h-screen bg-white">
+    <div className="relative min-h-screen overflow-hidden bg-white">
       {/* Animated Grid Pattern Background */}
       <AnimatedGridPattern
         numSquares={30}

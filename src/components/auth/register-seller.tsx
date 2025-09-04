@@ -317,24 +317,24 @@ export function RegisterSeller() {
 
         {/* Terms and Conditions */}
         <div className="space-y-3">
-          <div className="flex items-start space-x-2">
+          <div className="flex items-start space-x-3">
             <Checkbox
               id="agreeToTerms"
               checked={agreeToTerms}
               onCheckedChange={(checked) => setValue('agreeToTerms', checked as boolean)}
-              className="mt-1"
+              className="mt-1 flex-shrink-0"
             />
-            <div className="grid gap-1.5 leading-none">
+            <div className="flex-1 min-w-0">
               <Label
                 htmlFor="agreeToTerms"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                className="text-sm font-medium leading-relaxed text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block"
               >
                 Saya menyetujui{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800 underline">
+                <a href="#" className="text-blue-600 hover:text-blue-800 underline break-words">
                   Syarat dan Ketentuan
                 </a>{' '}
                 serta{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800 underline">
+                <a href="#" className="text-blue-600 hover:text-blue-800 underline break-words">
                   Kebijakan Privasi
                 </a>
               </Label>
