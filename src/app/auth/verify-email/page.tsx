@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, XCircle, Mail, Loader2, ArrowLeft } from 'lucide-react';
@@ -11,7 +11,7 @@ import { ShineBorder } from '@/components/magicui/shine-border';
 
 type VerificationStatus = 'loading' | 'success' | 'error' | 'expired' | 'resend';
 
-export default function VerifyEmailPage() {
+function VerifyEmailContent() {
   const [status, setStatus] = useState<VerificationStatus>('loading');
   const [isResending, setIsResending] = useState(false);
   const [email, setEmail] = useState('');
@@ -304,5 +304,42 @@ export default function VerifyEmailPage() {
         {renderContent()}
       </div>
     </div>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div className="min-h-screen flex items-center justify-center p-4">
+      <div className="w-full max-w-md">
+        <ShineBorder
+          className="rounded-lg"
+          shineColor={['#3b82f6', '#1d4ed8']}
+          borderWidth={2}
+          duration={8}
+        >
+          <Card className="border-0 shadow-2xl">
+            <CardHeader className="space-y-1 text-center">
+              <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
+              </div>
+              <CardTitle className="text-2xl font-bold text-gray-900">
+                Memuat...
+              </CardTitle>
+              <CardDescription className="text-gray-600">
+                Mohon tunggu sebentar
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        </ShineBorder>
+      </div>
+    </div>
+  );
+}
+
+export default function VerifyEmailPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <VerifyEmailContent />
+    </Suspense>
   );
 }
