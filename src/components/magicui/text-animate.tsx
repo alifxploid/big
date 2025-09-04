@@ -319,6 +319,12 @@ const TextAnimateBase = ({
   const MotionComponent = motion.create(Component);
 
   let segments: string[] = [];
+  
+  // Validasi children untuk mencegah error undefined
+  if (!children || typeof children !== 'string') {
+    return null;
+  }
+  
   switch (by) {
     case "word":
       segments = children.split(/(\s+)/);

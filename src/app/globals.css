@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Font Classes Grafity */
+.font-creepster {
+  font-family: var(--font-creepster), cursive;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
