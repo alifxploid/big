@@ -76,15 +76,15 @@ function VerifyEmailContent() {
             borderWidth={2}
             duration={8}
           >
-            <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800">
+            <Card className="border-0 shadow-2xl bg-white dark:bg-neutral-800">
               <CardHeader className="space-y-1 text-center">
                 <div className="mx-auto w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
                   <Loader2 className="w-6 h-6 text-blue-600 dark:text-blue-400 animate-spin" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Memverifikasi Email...
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
                   Mohon tunggu, kami sedang memverifikasi email Anda
                 </CardDescription>
               </CardHeader>
@@ -105,10 +105,10 @@ function VerifyEmailContent() {
                 <div className="mx-auto w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Email Berhasil Diverifikasi!
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
                   Akun Anda telah aktif dan siap digunakan
                 </CardDescription>
               </CardHeader>
@@ -123,9 +123,9 @@ function VerifyEmailContent() {
 
                 <Link href="/auth/login">
                   <ShimmerButton
-                    className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                    className="w-full bg-neutral-900 text-white hover:bg-neutral-800"
                     shimmerColor="#ffffff"
-                    background="rgba(17, 24, 39, 1)"
+                    background="rgba(23, 23, 23, 1)"
                   >
                     Lanjut ke Login
                   </ShimmerButton>
@@ -148,10 +148,10 @@ function VerifyEmailContent() {
                 <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4">
                   <XCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Verifikasi Gagal
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
                   Link verifikasi tidak valid atau telah kedaluwarsa
                 </CardDescription>
               </CardHeader>
@@ -168,9 +168,9 @@ function VerifyEmailContent() {
                   <ShimmerButton
                     onClick={handleResendEmail}
                     disabled={isResending}
-                    className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                    className="w-full bg-neutral-900 text-white hover:bg-neutral-800"
                     shimmerColor="#ffffff"
-                    background="rgba(17, 24, 39, 1)"
+                    background="rgba(23, 23, 23, 1)"
                   >
                     {isResending ? 'Mengirim...' : 'Kirim Ulang Email Verifikasi'}
                   </ShimmerButton>
@@ -200,10 +200,10 @@ function VerifyEmailContent() {
                 <div className="mx-auto w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4">
                   <Mail className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Link Kedaluwarsa
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
                   Link verifikasi telah kedaluwarsa
                 </CardDescription>
               </CardHeader>
@@ -220,9 +220,9 @@ function VerifyEmailContent() {
                   <ShimmerButton
                     onClick={handleResendEmail}
                     disabled={isResending}
-                    className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                    className="w-full bg-neutral-900 text-white hover:bg-neutral-800"
                     shimmerColor="#ffffff"
-                    background="rgba(17, 24, 39, 1)"
+                    background="rgba(23, 23, 23, 1)"
                   >
                     {isResending ? 'Mengirim...' : 'Kirim Link Verifikasi Baru'}
                   </ShimmerButton>
@@ -253,10 +253,10 @@ function VerifyEmailContent() {
                 <div className="mx-auto w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
                   <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Verifikasi Email Anda
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
                   Kami telah mengirim email verifikasi ke alamat email Anda
                 </CardDescription>
               </CardHeader>
@@ -276,9 +276,9 @@ function VerifyEmailContent() {
                   <ShimmerButton
                     onClick={handleResendEmail}
                     disabled={isResending}
-                    className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                    className="w-full bg-neutral-900 text-white hover:bg-neutral-800"
                     shimmerColor="#ffffff"
-                    background="rgba(17, 24, 39, 1)"
+                    background="rgba(23, 23, 23, 1)"
                   >
                     {isResending ? 'Mengirim...' : 'Kirim Ulang Email Verifikasi'}
                   </ShimmerButton>
@@ -322,10 +322,10 @@ function LoadingFallback() {
               <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
               </div>
-              <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+              <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                 Memuat...
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-300">
+              <CardDescription className="text-neutral-600 dark:text-neutral-300">
                 Mohon tunggu sebentar
               </CardDescription>
             </CardHeader>

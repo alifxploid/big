@@ -1,116 +1,166 @@
 'use client'
 
 import Link from 'next/link'
-import { Globe } from '@/components/magicui/globe'
+
 import { ShimmerButton } from '@/components/magicui/shimmer-button'
 import { ShinyButton } from '@/components/magicui/shiny-button'
 import { TextAnimate } from '@/components/magicui/text-animate'
 import { BoxReveal } from '@/components/magicui/box-reveal'
 import { TypingAnimation } from '@/components/magicui/typing-animation'
 import { ArrowRight, Shield, Zap, Users } from 'lucide-react'
+import { AnimatedGroup } from '@/components/ui/animated-group'
+import { Button } from '@/components/ui/button'
+import { BackgroundPaths } from '@/components/ui/background-paths'
+import { GlowingEffectDemo } from '@/components/ui/glowing-effect-demo'
+
+const transitionVariants = {
+  container: {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+      },
+    },
+  },
+  item: {
+    hidden: {
+      opacity: 0,
+      filter: 'blur(12px)',
+      y: 12,
+    },
+    visible: {
+      opacity: 1,
+      filter: 'blur(0px)',
+      y: 0,
+      transition: {
+        type: 'spring' as const,
+        bounce: 0.3,
+        duration: 1.5,
+      },
+    },
+  },
+}
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 pt-20">
-      {/* Globe Background */}
-      <div className="absolute inset-0 flex items-center justify-center top-32">
-        <Globe className="opacity-40 scale-110 max-sm:opacity-30 max-sm:scale-75 max-sm:top-20" />
+    <main className="relative overflow-hidden min-h-screen bg-white dark:bg-neutral-950">
+      {/* Background Paths */}
+      <div className="absolute inset-0 z-0">
+        <BackgroundPaths title="" showContent={false} />
       </div>
       
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 text-center max-sm:px-4">
-        <div className="mx-auto max-w-4xl">
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white max-sm:text-3xl max-sm:leading-tight">
-            <TextAnimate
-              as="span"
-              animation="blurInUp"
-              by="word"
-              delay={0.2}
-            >
-              Platform
-            </TextAnimate>
-            <TextAnimate
-              as="span"
-              className="text-blue-600"
-              animation="blurInUp"
-              by="word"
-              delay={0.4}
-            >
-              {" All-in-One "}
-            </TextAnimate>
-            <TextAnimate
-              as="span"
-              animation="blurInUp"
-              by="word"
-              delay={0.6}
-            >
-              untuk Bisnis Digital
-            </TextAnimate>
-           </h1>
-          
-          <BoxReveal boxColor="#3b82f6" duration={0.8}>
-            <TypingAnimation
-              as="p"
-              className="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300 sm:text-xl max-w-3xl mx-auto max-sm:mt-4 max-sm:text-base max-sm:leading-6 max-sm:max-w-2xl max-sm:px-2"
-              duration={50}
-              delay={1000}
-              startOnView={true}
-            >
-              Solusi lengkap untuk rekening bersama, social media marketing, dan PPOB. Tingkatkan bisnis Anda dengan platform yang aman, cepat, dan terpercaya.
-            </TypingAnimation>
-          </BoxReveal>
-          
-          <div className="mt-10 flex items-center justify-center gap-x-6 max-sm:mt-8 max-sm:flex-col max-sm:gap-4 max-sm:px-4">
-            <Link href="/auth/register" className="max-sm:w-full">
-              <ShimmerButton className="shadow-2xl max-sm:w-full max-sm:min-h-[48px]">
-                <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg max-sm:px-6 max-sm:py-3">
-                  Mulai Sekarang
-                </span>
-              </ShimmerButton>
-            </Link>
-            
-            <ShinyButton
-              onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors lg:text-base border-gray-200 dark:border-gray-600 bg-white/80 dark:bg-gray-800/80 max-sm:w-full max-sm:min-h-[48px] max-sm:px-4 max-sm:py-3"
-            >
-              <span className="flex items-center justify-center gap-1">
-                Pelajari Lebih Lanjut 
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </ShinyButton>
-          </div>
-          
-          {/* Stats */}
-          <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-3 lg:gap-16 max-sm:mt-12 max-sm:gap-6 max-sm:px-4">
-            <div className="flex flex-col items-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
-                <Shield className="h-6 w-6 text-white" />
-              </div>
-              <dt className="mt-4 text-base font-semibold text-gray-900 dark:text-white max-sm:mt-3">100% Aman</dt>
-              <dd className="mt-2 text-sm text-gray-600 dark:text-gray-300 max-sm:mt-1">Transaksi terlindungi</dd>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
-                <Zap className="h-6 w-6 text-white" />
-              </div>
-              <dt className="mt-4 text-base font-semibold text-gray-900 dark:text-white max-sm:mt-3">Instan</dt>
-              <dd className="mt-2 text-sm text-gray-600 dark:text-gray-300 max-sm:mt-1">Proses cepat 24/7</dd>
-            </div>
-            
-            <div className="flex flex-col items-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
-                <Users className="h-6 w-6 text-white" />
-              </div>
-              <dt className="mt-4 text-base font-semibold text-gray-900 dark:text-white max-sm:mt-3">10K+ User</dt>
-              <dd className="mt-2 text-sm text-gray-600 dark:text-gray-300 max-sm:mt-1">Dipercaya banyak orang</dd>
+      {/* Background Overlay */}
+      <div className="absolute inset-0 z-[1] bg-gradient-to-b from-transparent via-background/50 to-background" />
+      <section id="hero" className="relative z-10">
+        <div className="relative pt-24 md:pt-36">
+
+          <div aria-hidden className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,var(--background)_75%)]" />
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0 relative z-20">
+              <AnimatedGroup variants={transitionVariants}>
+                <Link
+                  href="#features"
+                  className="hover:bg-background dark:hover:border-t-border bg-muted group mx-auto flex w-fit items-center gap-4 rounded-full border p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:border-t-white/5 dark:shadow-zinc-950">
+                  <span className="text-foreground text-sm">Platform All-in-One untuk Bisnis Digital</span>
+                  <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
+
+                  <div className="bg-background group-hover:bg-muted size-6 overflow-hidden rounded-full duration-500">
+                    <div className="flex w-12 -translate-x-1/2 duration-500 ease-in-out group-hover:translate-x-0">
+                      <span className="flex size-6">
+                        <ArrowRight className="m-auto size-3" />
+                      </span>
+                      <span className="flex size-6">
+                        <ArrowRight className="m-auto size-3" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+    
+                <TypingAnimation
+                  className="mt-8 max-w-4xl mx-auto text-balance text-6xl md:text-7xl lg:mt-16 xl:text-[5.25rem] font-bold"
+                  duration={100}
+                  delay={1000}
+                >
+                  Platform All-in-One untuk Bisnis Digital
+                </TypingAnimation>
+                <p
+                  className="mx-auto mt-8 max-w-2xl text-balance text-lg">
+                  Solusi lengkap untuk rekening bersama, social media marketing, dan PPOB. Tingkatkan bisnis Anda dengan platform yang aman, cepat, dan terpercaya.
+                </p>
+              </AnimatedGroup>
+
+              <AnimatedGroup
+                variants={{
+                  container: {
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        staggerChildren: 0.05,
+                        delayChildren: 0.75,
+                      },
+                    },
+                  },
+                  item: transitionVariants.item,
+                }}
+                className="mt-12 flex flex-col items-center justify-center gap-2 md:flex-row">
+                <div
+                  key={1}
+                  className="bg-foreground/10 rounded-[14px] border p-0.5">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-xl px-5 text-base">
+                    <Link href="/auth/register">
+                      <span className="text-nowrap">Mulai Sekarang</span>
+                    </Link>
+                  </Button>
+                </div>
+                <Button
+                  key={2}
+                  asChild
+                  size="lg"
+                  variant="ghost"
+                  className="h-10.5 rounded-xl px-5"
+                  onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}>
+                  <Link href="#features">
+                    <span className="text-nowrap">Pelajari Lebih Lanjut</span>
+                  </Link>
+                </Button>
+              </AnimatedGroup>
             </div>
           </div>
         </div>
-      </div>
-      
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-white/20 dark:from-gray-900/20 to-transparent pointer-events-none" />
-    </section>
+
+        <AnimatedGroup
+          variants={{
+            container: {
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.05,
+                  delayChildren: 0.75,
+                },
+              },
+            },
+            item: transitionVariants.item,
+          }}>
+          <div className="relative mt-8 overflow-hidden px-4 sm:mr-0 sm:mt-12 md:mt-20">
+            <div
+              aria-hidden
+              className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35%"
+            />
+            <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-6xl overflow-hidden rounded-2xl border p-2 sm:p-4 shadow-lg shadow-zinc-950/15 ring-1">
+              {/* Glowing Effect Demo Cards */}
+              <div className="p-4 sm:p-8">
+                <GlowingEffectDemo />
+              </div>
+            </div>
+          </div>
+        </AnimatedGroup>
+      </section>
+    </main>
   )
 }

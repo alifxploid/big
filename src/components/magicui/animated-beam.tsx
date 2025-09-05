@@ -23,6 +23,13 @@ export interface AnimatedBeamProps {
   startYOffset?: number;
   endXOffset?: number;
   endYOffset?: number;
+  // Glowing effect props
+  glowingBorder?: boolean;
+  glowBlur?: number;
+  glowProximity?: number;
+  glowSpread?: number;
+  glowBorderWidth?: number;
+  glowMovementDuration?: number;
 }
 
 export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
@@ -43,10 +50,19 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
   startYOffset = 0,
   endXOffset = 0,
   endYOffset = 0,
+  // Glowing effect props
+  glowingBorder = false,
+  glowBlur = 4,
+  glowProximity = 100,
+  glowSpread = 20,
+  glowBorderWidth = 2,
+  glowMovementDuration = 2,
 }) => {
   const id = useId();
   const [pathD, setPathD] = useState("");
   const [svgDimensions, setSvgDimensions] = useState({ width: 0, height: 0 });
+  
+  
 
   // Calculate the gradient coordinates based on the reverse prop
   const gradientCoordinates = reverse
@@ -62,6 +78,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         y1: ["0%", "0%"],
         y2: ["0%", "0%"],
       };
+
+
 
   useEffect(() => {
     const updatePath = () => {
@@ -122,6 +140,8 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
     endYOffset,
   ]);
 
+
+
   return (
     <svg
       fill="none"
@@ -147,6 +167,7 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
         stroke={`url(#${id})`}
         strokeOpacity="1"
         strokeLinecap="round"
+        filter={glowingBorder ? `url(#glow-${id})` : undefined}
       />
       <defs>
         <motion.linearGradient
@@ -182,6 +203,18 @@ export const AnimatedBeam: React.FC<AnimatedBeamProps> = ({
             stopOpacity="0"
           ></stop>
         </motion.linearGradient>
+        {/* Glowing effect filter */}
+        {glowingBorder && (
+          <filter id={`glow-${id}`} x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation={glowBlur} result="coloredBlur"/>
+            <feFlood floodColor={gradientStartColor} floodOpacity="0.8" result="glowColor"/>
+            <feComposite in="glowColor" in2="coloredBlur" operator="in" result="coloredGlow"/>
+            <feMerge> 
+              <feMergeNode in="coloredGlow"/>
+              <feMergeNode in="SourceGraphic"/>
+            </feMerge>
+          </filter>
+        )}
       </defs>
     </svg>
   );

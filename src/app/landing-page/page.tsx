@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import Navbar from './components/Navbar'
-import SidebarMobile from './components/SidebarMobile'
+
 import Hero from './components/Hero'
 import FeatureGrid from './components/FeatureGrid'
 import HowItWorks from './components/HowItWorks'
@@ -22,9 +22,9 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900">
+    <div className="min-h-screen bg-white dark:bg-neutral-950">
       <Navbar onMobileMenuToggle={handleMobileMenuToggle} />
-      <SidebarMobile isOpen={mobileMenuOpen} onClose={handleMobileMenuClose} />
+
       
       <main>
         <Hero />

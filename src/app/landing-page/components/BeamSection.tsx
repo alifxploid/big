@@ -2,20 +2,28 @@
 
 import { useRef, forwardRef } from 'react'
 import { AnimatedBeam } from '@/components/magicui/animated-beam'
-import { Shield, TrendingUp, Smartphone, Zap } from 'lucide-react'
+import { ShineBorder } from '@/components/magicui/shine-border'
+import { Shield, TrendingUp, Smartphone, Zap, MoreHorizontal } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-const Circle = forwardRef<HTMLDivElement, { className?: string; children: React.ReactNode }>(({ className, children }, ref) => {
+const Circle = forwardRef<HTMLDivElement, { className?: string; children: React.ReactNode; glowColor?: string[] }>(({ className, children, glowColor }, ref) => {
   return (
-    <div
-      ref={ref}
-      className={cn(
-        'z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-white dark:bg-gray-800 p-4 shadow-lg hover:shadow-xl transition-shadow duration-300',
-        className,
-      )}
+    <ShineBorder
+      className="rounded-full"
+      shineColor={glowColor || ['#3b82f6', '#1d4ed8']}
+      borderWidth={2}
+      duration={6}
     >
-      {children}
-    </div>
+      <div
+        ref={ref}
+        className={cn(
+          'z-10 flex h-16 w-16 items-center justify-center rounded-full border-0 bg-white dark:bg-neutral-800 p-4 shadow-lg hover:shadow-xl transition-shadow duration-300',
+          className,
+        )}
+      >
+        {children}
+      </div>
+    </ShineBorder>
   )
 })
 
@@ -26,11 +34,11 @@ const FeatureIcon = forwardRef<HTMLDivElement, {
   label: string; 
   description: string;
   className?: string;
-  iconColor?: string;
-}>(({ icon, label, description, className, iconColor }, ref) => {
+  glowColor?: string[];
+}>(({ icon, label, description, className, glowColor }, ref) => {
   return (
     <div className={cn('flex flex-col items-center text-center space-y-2', className)}>
-      <Circle ref={ref} className={cn('border-2', iconColor)}>
+      <Circle ref={ref} glowColor={glowColor}>
         {icon}
       </Circle>
       <div className="space-y-1">
@@ -49,9 +57,10 @@ export default function BeamSection() {
   const div2Ref = useRef<HTMLDivElement>(null)
   const div3Ref = useRef<HTMLDivElement>(null)
   const div4Ref = useRef<HTMLDivElement>(null)
+  const div5Ref = useRef<HTMLDivElement>(null)
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <section className="py-24 bg-white dark:bg-neutral-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
           <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
@@ -64,7 +73,7 @@ export default function BeamSection() {
         
         <div className="relative">
           <div
-            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-10 md:shadow-xl"
+            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-2xl border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 p-10 md:shadow-xl"
             ref={containerRef}
           >
             {/* Grid 3 baris: atas, tengah (pusat), bawah */}
@@ -73,10 +82,10 @@ export default function BeamSection() {
               <div className="flex flex-row items-start justify-between">
                 <FeatureIcon
                   ref={div1Ref}
-                  icon={<Shield className="h-7 w-7 text-blue-600" />}
+                  icon={<Shield className="h-7 w-7 text-black dark:text-white" />}
                   label="Rekber"
                   description="Aman & terpercaya"
-                  iconColor="border-blue-500"
+                  glowColor={['#000000', '#374151']}
                   className="ml-2"
                 />
                 <FeatureIcon
@@ -84,7 +93,7 @@ export default function BeamSection() {
                   icon={<TrendingUp className="h-7 w-7 text-green-600" />}
                   label="SMM Panel"
                   description="Boost engagement"
-                  iconColor="border-green-500"
+                  glowColor={['#10b981', '#059669']}
                   className="mr-2"
                 />
               </div>
@@ -96,7 +105,7 @@ export default function BeamSection() {
                   icon={<Zap className="h-8 w-8 text-orange-600" />}
                   label="AllInOne"
                   description="Platform terpadu"
-                  iconColor="border-orange-500"
+                  glowColor={['#f97316', '#ea580c']}
                 />
               </div>
 
@@ -107,10 +116,17 @@ export default function BeamSection() {
                   icon={<Smartphone className="h-7 w-7 text-purple-600" />}
                   label="PPOB"
                   description="Bayar tagihan"
-                  iconColor="border-purple-500"
+                  glowColor={['#8b5cf6', '#7c3aed']}
                   className="ml-2"
                 />
-                <div className="w-16" />
+                <FeatureIcon
+                  ref={div5Ref}
+                  icon={<MoreHorizontal className="h-7 w-7 text-purple-600" />}
+                  label="Fitur Lainnya"
+                  description="Layanan tambahan"
+                  glowColor={['#8b5cf6', '#7c3aed']}
+                  className="mr-2"
+                />
               </div>
             </div>
 
@@ -124,6 +140,10 @@ export default function BeamSection() {
               duration={9}
               pathOpacity={0.35}
               pathWidth={2}
+              glowingBorder={true}
+              glowProximity={150}
+              glowSpread={30}
+              glowBorderWidth={3}
             />
             <AnimatedBeam
               containerRef={containerRef}
@@ -135,6 +155,10 @@ export default function BeamSection() {
               duration={8}
               pathOpacity={0.3}
               pathWidth={2}
+              glowingBorder={true}
+              glowProximity={150}
+              glowSpread={25}
+              glowBorderWidth={3}
             />
             <AnimatedBeam
               containerRef={containerRef}
@@ -145,6 +169,25 @@ export default function BeamSection() {
               duration={11}
               pathOpacity={0.35}
               pathWidth={2}
+              glowingBorder={true}
+              glowProximity={150}
+              glowSpread={28}
+              glowBorderWidth={3}
+            />
+            <AnimatedBeam
+              containerRef={containerRef}
+              fromRef={div5Ref}
+              toRef={div4Ref}
+              curvature={90}
+              endYOffset={10}
+              reverse
+              duration={10}
+              pathOpacity={0.3}
+              pathWidth={2}
+              glowingBorder={true}
+              glowProximity={150}
+              glowSpread={32}
+              glowBorderWidth={3}
             />
           </div>
         </div>

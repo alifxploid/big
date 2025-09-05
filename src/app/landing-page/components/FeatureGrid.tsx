@@ -55,13 +55,13 @@ const features = [
 
 export default function FeatureGrid() {
   return (
-    <section id="features" className="py-24 bg-gray-50 dark:bg-gray-800">
+    <section id="features" className="py-24 bg-white dark:bg-neutral-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
             Tiga Layanan Utama
           </h2>
-          <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
+          <p className="mt-4 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
             Platform all-in-one yang menggabungkan keamanan rekber, kekuatan SMM, dan kemudahan PPOB
           </p>
         </div>
@@ -70,20 +70,20 @@ export default function FeatureGrid() {
           {features.map((feature, index) => {
             const IconComponent = feature.icon
             return (
-              <Card key={index} className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-gray-900">
+              <Card key={index} className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white dark:bg-neutral-900">
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-blue-600">
-                      <IconComponent className="h-6 w-6 text-white" />
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-black dark:bg-white">
+                      <IconComponent className="h-6 w-6 text-white dark:text-black" />
                     </div>
                     <Badge variant={feature.badgeVariant}>{feature.badge}</Badge>
                   </div>
                   
-                  <CardTitle className="text-xl font-semibold text-gray-900 dark:text-white mt-4">
+                  <CardTitle className="text-xl font-semibold text-neutral-900 dark:text-white mt-4">
                     {feature.title}
                   </CardTitle>
                   
-                  <CardDescription className="text-gray-600 dark:text-gray-300">
+                  <CardDescription className="text-neutral-600 dark:text-neutral-300">
                     {feature.description}
                   </CardDescription>
                 </CardHeader>
@@ -93,7 +93,7 @@ export default function FeatureGrid() {
                     {feature.features.map((item, itemIndex) => (
                       <li key={itemIndex} className="flex items-start">
                         <CheckCircle className="h-5 w-5 text-green-500 mr-3 mt-0.5 flex-shrink-0" />
-                        <span className="text-sm text-gray-700 dark:text-gray-300">{item}</span>
+                        <span className="text-sm text-neutral-700 dark:text-neutral-300">{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -106,7 +106,7 @@ export default function FeatureGrid() {
                 </CardContent>
                 
                 {/* Decorative gradient */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-50 dark:from-blue-900/20 to-transparent opacity-50" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-neutral-50 dark:from-neutral-800/20 to-transparent opacity-50" />
               </Card>
             )
           })}
@@ -118,7 +118,7 @@ export default function FeatureGrid() {
           </p>
           <a
             href="#how-it-works"
-            className="inline-flex items-center text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium transition-colors"
+            className="inline-flex items-center text-black hover:text-gray-700 dark:text-white dark:hover:text-gray-300 font-medium transition-colors"
           >
             Pelajari cara kerjanya
             <ArrowRight className="ml-2 h-4 w-4" />

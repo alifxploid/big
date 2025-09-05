@@ -2,35 +2,43 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { ArrowLeft, CheckCircle } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { ArrowLeft, CheckCircle, Mail } from 'lucide-react';
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { ShimmerButton } from '@/components/magicui/shimmer-button';
 import { ShineBorder } from '@/components/magicui/shine-border';
-import { ForgotPasswordBuyer } from '@/components/auth/forgot-password-buyer';
-import { ForgotPasswordSeller } from '@/components/auth/forgot-password-seller';
 
-type ForgotPasswordFormData = {
-  email: string;
-  storeName?: string;
-};
+const forgotPasswordSchema = z.object({
+  email: z.string().email('Email tidak valid'),
+});
+
+type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 
 export default function ForgotPasswordPage() {
-  const [activeTab, setActiveTab] = useState('buyer');
   const [isLoading, setIsLoading] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState('');
-  const [userType, setUserType] = useState('');
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<ForgotPasswordFormData>({
+    resolver: zodResolver(forgotPasswordSchema),
+  });
 
   const onSubmit = async (data: ForgotPasswordFormData) => {
     setIsLoading(true);
     try {
       // TODO: Implement forgot password logic
-      console.log('Forgot password data:', { ...data, userType: activeTab });
+      console.log('Forgot password data:', data);
       await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
       setSubmittedEmail(data.email);
-      setUserType(activeTab);
       setIsEmailSent(true);
     } catch (error) {
       console.error('Forgot password error:', error);
@@ -49,26 +57,26 @@ export default function ForgotPasswordPage() {
             borderWidth={2}
             duration={8}
           />
-          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-neutral-800 rounded-lg">
               <CardHeader className="space-y-1 text-center">
                 <div className="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle className="w-6 h-6 text-green-600" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
+                <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
                   Email Terkirim!
                 </CardTitle>
-                <CardDescription className="text-gray-600 dark:text-gray-300">
-                  Kami telah mengirim link reset password {userType === 'buyer' ? 'pembeli' : 'penjual'} ke email Anda
+                <CardDescription className="text-neutral-600 dark:text-neutral-300">
+                  Kami telah mengirim link reset password ke email Anda
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Email dikirim ke:</p>
-                    <p className="font-medium text-gray-900 dark:text-white">{submittedEmail}</p>
+                  <div className="bg-neutral-50 dark:bg-neutral-700 p-4 rounded-lg">
+                    <p className="text-sm text-neutral-600 dark:text-neutral-300 mb-2">Email dikirim ke:</p>
+                    <p className="font-medium text-neutral-900 dark:text-white">{submittedEmail}</p>
                   </div>
                   
-                  <div className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
+                  <div className="text-sm text-neutral-600 dark:text-neutral-300 space-y-2">
                     <p>Silakan cek email Anda dan klik link yang kami kirim untuk reset password.</p>
                     <p>Jika tidak menerima email dalam 5 menit, cek folder spam Anda.</p>
                   </div>
@@ -79,16 +87,14 @@ export default function ForgotPasswordPage() {
                     onClick={() => {
                       setIsEmailSent(false);
                       setSubmittedEmail('');
-                      setUserType('');
-                      setActiveTab('buyer');
                     }}
-                    className="w-full bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600 dark:[background:var(--dark-bg,var(--bg))]"
+                    className="w-full bg-neutral-900 dark:bg-neutral-700 text-white hover:bg-neutral-800 dark:hover:bg-neutral-600 dark:text-white dark:border-neutral-600 dark:[background:var(--dark-bg,var(--bg))]"
                     style={{
-                      '--bg': 'rgba(17, 24, 39, 1)',
-                      '--dark-bg': 'rgba(55, 65, 81, 1)'
+                      '--bg': 'rgba(23, 23, 23, 1)',
+                      '--dark-bg': 'rgba(64, 64, 64, 1)'
                     } as React.CSSProperties}
                     shimmerColor="#ffffff"
-                    background="rgba(17, 24, 39, 1)"
+                    background="rgba(23, 23, 23, 1)"
                   >
                     Kirim Ulang Email
                   </ShimmerButton>
@@ -116,48 +122,46 @@ export default function ForgotPasswordPage() {
           borderWidth={2}
           duration={8}
         >
-          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-neutral-800 rounded-lg">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
+              <CardTitle className="text-3xl font-bold text-neutral-900 dark:text-white">
                 Lupa Password?
               </CardTitle>
-              <CardDescription className="text-gray-600 dark:text-gray-300">
-                Pilih jenis akun untuk reset password
+              <CardDescription className="text-neutral-600 dark:text-neutral-300">
+                Masukkan email Anda untuk menerima link reset password
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-                <TabsList className="grid w-full grid-cols-2 mb-6">
-                  <TabsTrigger 
-                    value="buyer" 
-                    className="data-[state=active]:bg-blue-600 data-[state=active]:text-white"
-                  >
-                    Pembeli
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="seller" 
-                    className="data-[state=active]:bg-green-600 data-[state=active]:text-white"
-                  >
-                    Penjual
-                  </TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="buyer" className="space-y-4">
-                  <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Reset Password Pembeli</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Masukkan email akun pembeli Anda</p>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-sm font-medium text-neutral-900 dark:text-white">
+                    Email
+                  </Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-neutral-400" />
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@email.com"
+                      className="pl-10 h-12 border-neutral-300 dark:border-neutral-600 dark:bg-neutral-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
+                      {...register('email')}
+                    />
                   </div>
-                  <ForgotPasswordBuyer onSubmit={onSubmit} isLoading={isLoading} />
-                </TabsContent>
-                
-                <TabsContent value="seller" className="space-y-4">
-                  <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Reset Password Penjual</h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-300">Masukkan email dan nama toko (opsional)</p>
-                  </div>
-                  <ForgotPasswordSeller onSubmit={onSubmit} isLoading={isLoading} />
-                </TabsContent>
-              </Tabs>
+                  {errors.email && (
+                    <p className="text-sm text-red-600">{errors.email.message}</p>
+                  )}
+                </div>
+
+                <ShimmerButton
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full bg-neutral-900 text-white hover:bg-neutral-800"
+                  shimmerColor="#ffffff"
+                  background="rgba(23, 23, 23, 1)"
+                >
+                  {isLoading ? 'Mengirim...' : 'Kirim Link Reset Password'}
+                </ShimmerButton>
+              </form>
 
               <div className="text-center">
                 <Link
@@ -169,8 +173,8 @@ export default function ForgotPasswordPage() {
                 </Link>
               </div>
 
-              <div className="text-center pt-4 border-t border-gray-200 dark:border-gray-600">
-                <p className="text-sm text-gray-600 dark:text-gray-300">
+              <div className="text-center pt-4 border-t border-neutral-200 dark:border-neutral-600">
+                <p className="text-sm text-neutral-600 dark:text-neutral-300">
                   Belum punya akun?{' '}
                   <Link
                     href="/auth/register"
