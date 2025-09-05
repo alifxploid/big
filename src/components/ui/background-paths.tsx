@@ -2,17 +2,18 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 
-function FloatingPaths({ position }: { position: number }) {
-    const paths = Array.from({ length: 36 }, (_, i) => ({
+function FloatingPaths({ position, prefersReducedMotion = false }: { position: number; prefersReducedMotion?: boolean }) {
+    const paths = Array.from({ length: 18 }, (_, i) => ({
         id: i,
-        d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
+        d: `M-${380 - i * 5 * position} -${389 + i * 6}C-${
             380 - i * 5 * position
-        } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
+        } -${389 + i * 6} -${312 - i * 5 * position} ${16 - i * 6} ${
             152 - i * 5 * position
-        } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
+        } ${143 - i * 6}C${616 - i * 5 * position} ${270 - i * 6} ${
             684 - i * 5 * position
-        } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
+        } ${675 - i * 6} ${684 - i * 5 * position} ${675 - i * 6}`,
         color: `rgba(15,23,42,${0.1 + i * 0.03})`,
         width: 0.5 + i * 0.03,
     }));
@@ -32,14 +33,14 @@ function FloatingPaths({ position }: { position: number }) {
                         stroke="currentColor"
                         strokeWidth={path.width}
                         strokeOpacity={0.1 + path.id * 0.03}
-                        initial={{ pathLength: 0.3, opacity: 0.6 }}
-                        animate={{
+                        initial={{ pathLength: prefersReducedMotion ? 1 : 0.3, opacity: prefersReducedMotion ? 0.4 : 0.6 }}
+                        animate={prefersReducedMotion ? {} : {
                             pathLength: 1,
                             opacity: [0.3, 0.6, 0.3],
                             pathOffset: [0, 1, 0],
                         }}
-                        transition={{
-                            duration: 20 + Math.random() * 10,
+                        transition={prefersReducedMotion ? {} : {
+                            duration: 15 + Math.random() * 8,
                             repeat: Number.POSITIVE_INFINITY,
                             ease: "linear",
                         }}
@@ -57,13 +58,19 @@ export function BackgroundPaths({
     title?: string;
     showContent?: boolean;
 }) {
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
     const words = title.split(" ");
+
+    useEffect(() => {
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        setPrefersReducedMotion(mediaQuery.matches);
+    }, []);
 
     return (
         <div className={`relative ${showContent ? 'min-h-screen w-full flex items-center justify-center' : 'w-full h-full'} overflow-hidden ${showContent ? 'bg-white dark:bg-neutral-950' : ''}`}>
             <div className="absolute inset-0">
-                <FloatingPaths position={1} />
-                <FloatingPaths position={-1} />
+                <FloatingPaths position={1} prefersReducedMotion={prefersReducedMotion} />
+                <FloatingPaths position={-1} prefersReducedMotion={prefersReducedMotion} />
             </div>
 
             {showContent && title && (

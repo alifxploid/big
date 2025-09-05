@@ -3,7 +3,7 @@
 import Link from 'next/link'
 
 import { TypingAnimation } from '@/components/magicui/typing-animation'
-import { ArrowRight, Shield, Zap, Users } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { AnimatedGroup } from '@/components/ui/animated-group'
 import { Button } from '@/components/ui/button'
 import { BackgroundPaths } from '@/components/ui/background-paths'
@@ -15,15 +15,15 @@ const transitionVariants = {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.08,
       },
     },
   },
   item: {
     hidden: {
       opacity: 0,
-      filter: 'blur(12px)',
-      y: 12,
+      filter: 'blur(8px)',
+      y: -100,
     },
     visible: {
       opacity: 1,
@@ -31,8 +31,8 @@ const transitionVariants = {
       y: 0,
       transition: {
         type: 'spring' as const,
-        bounce: 0.3,
-        duration: 1.5,
+        bounce: 0.1,
+        duration: 0.5,
       },
     },
   },

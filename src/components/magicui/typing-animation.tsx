@@ -16,7 +16,7 @@ interface TypingAnimationProps extends MotionProps {
 export function TypingAnimation({
   children,
   className,
-  duration = 100,
+  duration = 150,
   delay = 0,
   as: Component = "div",
   startOnView = false,
@@ -28,6 +28,7 @@ export function TypingAnimation({
 
   const [displayedText, setDisplayedText] = useState<string>("");
   const [started, setStarted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const elementRef = useRef<HTMLElement | null>(null);
   const isInView = useInView(elementRef as React.RefObject<Element>, {
     amount: 0.3,
@@ -35,6 +36,15 @@ export function TypingAnimation({
   });
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+
+    if (mediaQuery.matches) {
+      setDisplayedText(children);
+      return;
+    }
+
     if (!startOnView) {
       const startTimeout = setTimeout(() => {
         setStarted(true);
@@ -49,10 +59,10 @@ export function TypingAnimation({
     }, delay);
 
     return () => clearTimeout(startTimeout);
-  }, [delay, startOnView, isInView]);
+  }, [delay, startOnView, isInView, children]);
 
   useEffect(() => {
-    if (!started) return;
+    if (!started || prefersReducedMotion) return;
 
     const graphemes = Array.from(children);
     let i = 0;
@@ -68,7 +78,7 @@ export function TypingAnimation({
     return () => {
       clearInterval(typingEffect);
     };
-  }, [children, duration, started]);
+  }, [children, duration, started, prefersReducedMotion]);
 
   return (
     <MotionComponent

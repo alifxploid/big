@@ -1,5 +1,5 @@
 'use client';
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import React from 'react';
@@ -143,11 +143,42 @@ function AnimatedGroup({
   variants,
   preset,
 }: AnimatedGroupProps) {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReducedMotion(mediaQuery.matches);
+  }, []);
+
   const selectedVariants = preset
     ? presetVariants[preset]
     : { container: defaultContainerVariants, item: defaultItemVariants };
-  const containerVariants = variants?.container || selectedVariants.container;
-  const itemVariants = variants?.item || selectedVariants.item;
+  
+  // Create reduced motion variants
+  const reducedMotionVariants = {
+    container: {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          duration: 0.2,
+        },
+      },
+    },
+    item: {
+      hidden: { opacity: 0 },
+      visible: {
+        opacity: 1,
+        transition: {
+          duration: 0.2,
+        },
+      },
+    },
+  };
+
+  const finalVariants = prefersReducedMotion ? reducedMotionVariants : selectedVariants;
+  const containerVariants = variants?.container || finalVariants.container;
+  const itemVariants = variants?.item || finalVariants.item;
 
   return (
     <motion.div

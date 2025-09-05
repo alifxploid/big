@@ -193,3 +193,18 @@
     animation: none;
     mix-blend-mode: normal;
 }
+
+/* Optimized view transition for theme toggle darkmode */
+::view-transition-new(root) {
+    will-change: clip-path;
+    transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(root), ::view-transition-new(root) {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -5,8 +5,10 @@ import Navbar from './components/Navbar'
 
 import Hero from './components/Hero'
 import FeatureGrid from './components/FeatureGrid'
+import ServicesSection from './components/ServicesSection'
 import HowItWorks from './components/HowItWorks'
 import BeamSection from './components/BeamSection'
+import PaymentGateway from './components/PaymentGateway'
 import CTASection from './components/CTASection'
 import Footer from './components/Footer'
 
@@ -29,8 +31,10 @@ export default function LandingPage() {
       <main>
         <Hero />
         <FeatureGrid />
+        <ServicesSection />
         <HowItWorks />
         <BeamSection />
+        <PaymentGateway />
         <CTASection />
       </main>
       

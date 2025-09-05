@@ -10,7 +10,9 @@ import { cn } from '@/lib/utils'
 const navigation = [
   { name: 'Beranda', href: '#hero' },
   { name: 'Fitur', href: '#features' },
+  { name: 'Layanan', href: '#services' },
   { name: 'Cara Kerja', href: '#how-it-works' },
+  { name: 'Payment', href: '#payment' },
   { name: 'Kontak', href: '#contact' },
 ]
 

@@ -32,10 +32,16 @@ const GlowingEffect = memo(
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
     const animationFrameRef = useRef<number>(0);
+    const throttleRef = useRef<number>(0);
 
     const handleMove = useCallback(
       (e?: MouseEvent | { x: number; y: number }) => {
         if (!containerRef.current) return;
+
+        // Throttle mouse events for better performance
+        const now = Date.now();
+        if (now - throttleRef.current < 16) return; // ~60fps
+        throttleRef.current = now;
 
         if (animationFrameRef.current) {
           cancelAnimationFrame(animationFrameRef.current);
@@ -86,8 +92,8 @@ const GlowingEffect = memo(
           const newAngle = currentAngle + angleDiff;
 
           animate(currentAngle, newAngle, {
-            duration: movementDuration,
-            ease: [0.16, 1, 0.3, 1],
+            duration: movementDuration * 0.7, // Reduce animation duration
+            ease: [0.25, 0.46, 0.45, 0.94], // Lighter easing
             onUpdate: (value) => {
               element.style.setProperty("--start", String(value));
             },
