@@ -5,18 +5,13 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
-import { Progress } from '@/components/ui/progress'
-import { Alert, AlertDescription } from '@/components/ui/alert'
 
 import { clearAdminSessionCookie } from '../lib/auth'
 import { 
   Users, 
   Settings, 
   BarChart3, 
-  Shield, 
-  LogOut, 
-  Bell,
+  Shield,
   Activity,
   TrendingUp,
   Database
