@@ -2,10 +2,6 @@
 
 import Link from 'next/link'
 
-import { ShimmerButton } from '@/components/magicui/shimmer-button'
-import { ShinyButton } from '@/components/magicui/shiny-button'
-import { TextAnimate } from '@/components/magicui/text-animate'
-import { BoxReveal } from '@/components/magicui/box-reveal'
 import { TypingAnimation } from '@/components/magicui/typing-animation'
 import { ArrowRight, Shield, Zap, Users } from 'lucide-react'
 import { AnimatedGroup } from '@/components/ui/animated-group'
