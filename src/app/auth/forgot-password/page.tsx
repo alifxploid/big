@@ -49,26 +49,26 @@ export default function ForgotPasswordPage() {
             borderWidth={2}
             duration={8}
           />
-          <Card className="border-0 shadow-2xl bg-white rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
               <CardHeader className="space-y-1 text-center">
                 <div className="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
                   <CheckCircle className="w-6 h-6 text-green-600" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Email Terkirim!
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Kami telah mengirim link reset password {userType === 'buyer' ? 'pembeli' : 'penjual'} ke email Anda
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <p className="text-sm text-gray-600 mb-2">Email dikirim ke:</p>
-                    <p className="font-medium text-gray-900">{submittedEmail}</p>
+                  <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mb-2">Email dikirim ke:</p>
+                    <p className="font-medium text-gray-900 dark:text-white">{submittedEmail}</p>
                   </div>
                   
-                  <div className="text-sm text-gray-600 space-y-2">
+                  <div className="text-sm text-gray-600 dark:text-gray-300 space-y-2">
                     <p>Silakan cek email Anda dan klik link yang kami kirim untuk reset password.</p>
                     <p>Jika tidak menerima email dalam 5 menit, cek folder spam Anda.</p>
                   </div>
@@ -82,7 +82,11 @@ export default function ForgotPasswordPage() {
                       setUserType('');
                       setActiveTab('buyer');
                     }}
-                    className="w-full bg-gray-900 text-white hover:bg-gray-800"
+                    className="w-full bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600 dark:[background:var(--dark-bg,var(--bg))]"
+                    style={{
+                      '--bg': 'rgba(17, 24, 39, 1)',
+                      '--dark-bg': 'rgba(55, 65, 81, 1)'
+                    } as React.CSSProperties}
                     shimmerColor="#ffffff"
                     background="rgba(17, 24, 39, 1)"
                   >
@@ -91,7 +95,7 @@ export default function ForgotPasswordPage() {
 
                   <Link
                     href="/auth/login"
-                    className="block w-full text-center py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
+                    className="block w-full text-center py-3 px-4 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 border border-blue-200 dark:border-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                   >
                     Kembali ke Login
                   </Link>
@@ -112,12 +116,12 @@ export default function ForgotPasswordPage() {
           borderWidth={2}
           duration={8}
         >
-          <Card className="border-0 shadow-2xl bg-white rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900">
+              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
                 Lupa Password?
               </CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardDescription className="text-gray-600 dark:text-gray-300">
                 Pilih jenis akun untuk reset password
               </CardDescription>
             </CardHeader>
@@ -140,16 +144,16 @@ export default function ForgotPasswordPage() {
                 
                 <TabsContent value="buyer" className="space-y-4">
                   <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Reset Password Pembeli</h3>
-                    <p className="text-sm text-gray-600">Masukkan email akun pembeli Anda</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Reset Password Pembeli</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Masukkan email akun pembeli Anda</p>
                   </div>
                   <ForgotPasswordBuyer onSubmit={onSubmit} isLoading={isLoading} />
                 </TabsContent>
                 
                 <TabsContent value="seller" className="space-y-4">
                   <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Reset Password Penjual</h3>
-                    <p className="text-sm text-gray-600">Masukkan email dan nama toko (opsional)</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Reset Password Penjual</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Masukkan email dan nama toko (opsional)</p>
                   </div>
                   <ForgotPasswordSeller onSubmit={onSubmit} isLoading={isLoading} />
                 </TabsContent>
@@ -158,19 +162,19 @@ export default function ForgotPasswordPage() {
               <div className="text-center">
                 <Link
                   href="/auth/login"
-                  className="inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-800"
+                  className="inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                 >
                   <ArrowLeft className="w-4 h-4 mr-2" />
                   Kembali ke Login
                 </Link>
               </div>
 
-              <div className="text-center pt-4 border-t border-gray-200">
-                <p className="text-sm text-gray-600">
+              <div className="text-center pt-4 border-t border-gray-200 dark:border-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Belum punya akun?{' '}
                   <Link
                     href="/auth/register"
-                    className="font-medium text-blue-600 hover:text-blue-800"
+                    className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                   >
                     Daftar sekarang
                   </Link>

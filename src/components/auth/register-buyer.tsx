@@ -69,9 +69,13 @@ export function RegisterBuyer() {
       {/* Google Registration Button */}
       <ShimmerButton
         onClick={handleGoogleRegister}
-        className="w-full bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+        className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600"
         shimmerColor="#3b82f6"
         background="rgba(255, 255, 255, 1)"
+        style={{
+          '--bg': 'rgba(255, 255, 255, 1)',
+          '--dark-bg': 'rgba(55, 65, 81, 1)'
+        } as React.CSSProperties & { '--bg': string; '--dark-bg': string }}
       >
         <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
           <path
@@ -99,7 +103,7 @@ export function RegisterBuyer() {
           <span className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2 text-gray-500">Atau</span>
+          <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">Atau</span>
         </div>
       </div>
 
@@ -108,7 +112,7 @@ export function RegisterBuyer() {
         {/* Name Fields */}
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
-            <Label htmlFor="firstName" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="firstName" className="text-sm font-medium text-gray-900 dark:text-white">
               Nama Depan
             </Label>
             <div className="relative">
@@ -117,7 +121,7 @@ export function RegisterBuyer() {
                 id="firstName"
                 type="text"
                 placeholder="John"
-                className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('firstName')}
               />
             </div>
@@ -127,7 +131,7 @@ export function RegisterBuyer() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="lastName" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="lastName" className="text-sm font-medium text-gray-900 dark:text-white">
               Nama Belakang
             </Label>
             <div className="relative">
@@ -136,7 +140,7 @@ export function RegisterBuyer() {
                 id="lastName"
                 type="text"
                 placeholder="Doe"
-                className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('lastName')}
               />
             </div>
@@ -148,7 +152,7 @@ export function RegisterBuyer() {
 
         {/* Email Field */}
         <div className="space-y-2">
-          <Label htmlFor="email" className="text-sm font-medium text-gray-900">
+          <Label htmlFor="email" className="text-sm font-medium text-gray-900 dark:text-white">
             Email
           </Label>
           <div className="relative">
@@ -157,7 +161,7 @@ export function RegisterBuyer() {
               id="email"
               type="email"
               placeholder="john@email.com"
-              className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               {...register('email')}
             />
           </div>
@@ -168,7 +172,7 @@ export function RegisterBuyer() {
 
         {/* Phone Field */}
         <div className="space-y-2">
-          <Label htmlFor="phone" className="text-sm font-medium text-gray-900">
+          <Label htmlFor="phone" className="text-sm font-medium text-gray-900 dark:text-white">
             Nomor Telepon
           </Label>
           <div className="relative">
@@ -177,7 +181,7 @@ export function RegisterBuyer() {
               id="phone"
               type="tel"
               placeholder="08123456789"
-              className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               {...register('phone')}
             />
           </div>
@@ -188,7 +192,7 @@ export function RegisterBuyer() {
 
         {/* Password Field */}
         <div className="space-y-2">
-          <Label htmlFor="password" className="text-sm font-medium text-gray-900">
+          <Label htmlFor="password" className="text-sm font-medium text-gray-900 dark:text-white">
             Password
           </Label>
           <div className="relative">
@@ -197,7 +201,7 @@ export function RegisterBuyer() {
               id="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Minimal 8 karakter"
-              className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="pl-10 pr-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               {...register('password')}
             />
             <button
@@ -215,7 +219,7 @@ export function RegisterBuyer() {
 
         {/* Confirm Password Field */}
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-900">
+          <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-900 dark:text-white">
             Konfirmasi Password
           </Label>
           <div className="relative">
@@ -224,7 +228,7 @@ export function RegisterBuyer() {
               id="confirmPassword"
               type={showConfirmPassword ? 'text' : 'password'}
               placeholder="Ulangi password"
-              className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="pl-10 pr-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               {...register('confirmPassword')}
             />
             <button
@@ -251,7 +255,7 @@ export function RegisterBuyer() {
           <div className="flex-1 min-w-0">
             <Label
               htmlFor="agreeToTerms"
-              className="text-sm font-medium leading-relaxed text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block"
+              className="text-sm font-medium leading-relaxed text-gray-700 dark:text-gray-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block"
             >
               Saya menyetujui{' '}
               <a href="#" className="text-blue-600 hover:text-blue-800 underline break-words">

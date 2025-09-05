@@ -74,9 +74,13 @@ export function RegisterSeller() {
       {/* Google Registration Button */}
       <ShimmerButton
         onClick={handleGoogleRegister}
-        className="w-full bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+        className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600"
         shimmerColor="#3b82f6"
         background="rgba(255, 255, 255, 1)"
+        style={{
+          '--bg': 'rgba(255, 255, 255, 1)',
+          '--dark-bg': 'rgba(55, 65, 81, 1)'
+        } as React.CSSProperties & { '--bg': string; '--dark-bg': string }}
       >
         <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
           <path
@@ -104,7 +108,7 @@ export function RegisterSeller() {
           <span className="w-full border-t border-gray-300" />
         </div>
         <div className="relative flex justify-center text-xs uppercase">
-          <span className="bg-white px-2 text-gray-500">Atau</span>
+          <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">Atau</span>
         </div>
       </div>
 
@@ -112,21 +116,21 @@ export function RegisterSeller() {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         {/* Personal Information */}
         <div className="space-y-4">
-          <h4 className="text-sm font-semibold text-gray-900 border-b pb-2">Informasi Pribadi</h4>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white border-b dark:border-gray-600 pb-2">Informasi Pribadi</h4>
           
           {/* Name Fields */}
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="firstName" className="text-sm font-medium text-gray-900">
+              <Label htmlFor="firstName" className="text-sm font-medium text-gray-900 dark:text-white">
                 Nama Depan
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                 <Input
                   id="firstName"
                   type="text"
                   placeholder="John"
-                  className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                   {...register('firstName')}
                 />
               </div>
@@ -136,16 +140,16 @@ export function RegisterSeller() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="lastName" className="text-sm font-medium text-gray-900">
+              <Label htmlFor="lastName" className="text-sm font-medium text-gray-900 dark:text-white">
                 Nama Belakang
               </Label>
               <div className="relative">
-                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                <User className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                 <Input
                   id="lastName"
                   type="text"
                   placeholder="Doe"
-                  className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                  className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                   {...register('lastName')}
                 />
               </div>
@@ -157,16 +161,16 @@ export function RegisterSeller() {
 
           {/* Email Field */}
           <div className="space-y-2">
-            <Label htmlFor="email" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="email" className="text-sm font-medium text-gray-900 dark:text-white">
               Email
             </Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Input
                 id="email"
                 type="email"
                 placeholder="john@email.com"
-                className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('email')}
               />
             </div>
@@ -177,16 +181,16 @@ export function RegisterSeller() {
 
           {/* Phone Field */}
           <div className="space-y-2">
-            <Label htmlFor="phone" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="phone" className="text-sm font-medium text-gray-900 dark:text-white">
               Nomor Telepon
             </Label>
             <div className="relative">
-              <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Phone className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Input
                 id="phone"
                 type="tel"
                 placeholder="08123456789"
-                className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('phone')}
               />
             </div>
@@ -198,20 +202,20 @@ export function RegisterSeller() {
 
         {/* Store Information */}
         <div className="space-y-4">
-          <h4 className="text-sm font-semibold text-gray-900 border-b pb-2">Informasi Toko</h4>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white border-b dark:border-gray-600 pb-2">Informasi Toko</h4>
           
           {/* Store Name */}
           <div className="space-y-2">
-            <Label htmlFor="storeName" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="storeName" className="text-sm font-medium text-gray-900 dark:text-white">
               Nama Toko
             </Label>
             <div className="relative">
-              <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Input
                 id="storeName"
                 type="text"
                 placeholder="Toko Saya"
-                className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('storeName')}
               />
             </div>
@@ -222,13 +226,13 @@ export function RegisterSeller() {
 
           {/* Store Description */}
           <div className="space-y-2">
-            <Label htmlFor="storeDescription" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="storeDescription" className="text-sm font-medium text-gray-900 dark:text-white">
               Deskripsi Toko
             </Label>
             <Textarea
               id="storeDescription"
               placeholder="Ceritakan tentang toko Anda..."
-              className="min-h-[80px] border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+              className="min-h-[80px] border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
               {...register('storeDescription')}
             />
             {errors.storeDescription && (
@@ -238,15 +242,15 @@ export function RegisterSeller() {
 
           {/* Store Address */}
           <div className="space-y-2">
-            <Label htmlFor="storeAddress" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="storeAddress" className="text-sm font-medium text-gray-900 dark:text-white">
               Alamat Toko
             </Label>
             <div className="relative">
-              <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <MapPin className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Textarea
                 id="storeAddress"
                 placeholder="Alamat lengkap toko Anda"
-                className="pl-10 min-h-[80px] border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 min-h-[80px] border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('storeAddress')}
               />
             </div>
@@ -258,25 +262,25 @@ export function RegisterSeller() {
 
         {/* Password Fields */}
         <div className="space-y-4">
-          <h4 className="text-sm font-semibold text-gray-900 border-b pb-2">Keamanan Akun</h4>
+          <h4 className="text-sm font-semibold text-gray-900 dark:text-white border-b dark:border-gray-600 pb-2">Keamanan Akun</h4>
           
           {/* Password Field */}
           <div className="space-y-2">
-            <Label htmlFor="password" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="password" className="text-sm font-medium text-gray-900 dark:text-white">
               Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Input
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 placeholder="Minimal 8 karakter"
-                className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 pr-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('password')}
               />
               <button
                 type="button"
-                className="absolute right-3 top-3 h-4 w-4 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400"
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? <EyeOff /> : <Eye />}
@@ -289,21 +293,21 @@ export function RegisterSeller() {
 
           {/* Confirm Password Field */}
           <div className="space-y-2">
-            <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-900">
+            <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-900 dark:text-white">
               Konfirmasi Password
             </Label>
             <div className="relative">
-              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+              <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
               <Input
                 id="confirmPassword"
                 type={showConfirmPassword ? 'text' : 'password'}
                 placeholder="Ulangi password"
-                className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                className="pl-10 pr-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
                 {...register('confirmPassword')}
               />
               <button
                 type="button"
-                className="absolute right-3 top-3 h-4 w-4 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-400"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
               >
                 {showConfirmPassword ? <EyeOff /> : <Eye />}
@@ -327,14 +331,14 @@ export function RegisterSeller() {
             <div className="flex-1 min-w-0">
               <Label
                 htmlFor="agreeToTerms"
-                className="text-sm font-medium leading-relaxed text-gray-700 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block"
+                className="text-sm font-medium leading-relaxed text-gray-700 dark:text-gray-300 peer-disabled:cursor-not-allowed peer-disabled:opacity-70 block"
               >
                 Saya menyetujui{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800 underline break-words">
+                <a href="#" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline break-words">
                   Syarat dan Ketentuan
                 </a>{' '}
                 serta{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-800 underline break-words">
+                <a href="#" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline break-words">
                   Kebijakan Privasi
                 </a>
               </Label>

@@ -60,12 +60,12 @@ export default function LoginPage() {
           borderWidth={2}
           duration={8}
         >
-          <Card className="border-0 shadow-2xl bg-white rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900">
+              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
                 Masuk
               </CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardDescription className="text-gray-600 dark:text-gray-300">
                 Masuk ke akun Anda untuk melanjutkan
               </CardDescription>
             </CardHeader>
@@ -73,9 +73,13 @@ export default function LoginPage() {
               {/* Google Login Button */}
               <ShimmerButton
                 onClick={handleGoogleLogin}
-                className="w-full bg-white text-gray-900 border border-gray-300 hover:bg-gray-50"
+                className="w-full bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-600"
                 shimmerColor="#3b82f6"
                 background="rgba(255, 255, 255, 1)"
+                style={{
+                  '--bg': 'rgba(255, 255, 255, 1)',
+                  '--dark-bg': 'rgba(55, 65, 81, 1)'
+                } as React.CSSProperties & { '--bg': string; '--dark-bg': string }}
               >
                 <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
                   <path
@@ -100,64 +104,64 @@ export default function LoginPage() {
 
               <div className="relative">
                 <div className="absolute inset-0 flex items-center">
-                  <span className="w-full border-t border-gray-300" />
+                  <span className="w-full border-t border-gray-300 dark:border-gray-600" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-white px-2 text-gray-500">Atau</span>
+                  <span className="bg-white dark:bg-gray-800 px-2 text-gray-500 dark:text-gray-400">Atau</span>
                 </div>
               </div>
 
               {/* Login Form */}
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium text-gray-900">
+                  <Label htmlFor="email" className="text-sm font-medium text-gray-900 dark:text-white">
                     Email
                   </Label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                     <Input
                       id="email"
                       type="email"
                       placeholder="nama@email.com"
-                      className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="pl-10 h-12 border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                       {...register('email')}
                     />
                   </div>
                   {errors.email && (
-                    <p className="text-sm text-red-600">{errors.email.message}</p>
+                    <p className="text-sm text-red-600 dark:text-red-400">{errors.email.message}</p>
                   )}
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="password" className="text-sm font-medium text-gray-900">
+                  <Label htmlFor="password" className="text-sm font-medium text-gray-900 dark:text-white">
                     Password
                   </Label>
                   <div className="relative">
-                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
                     <Input
                       id="password"
                       type={showPassword ? 'text' : 'password'}
                       placeholder="Masukkan password"
-                      className="pl-10 pr-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+                      className="pl-10 pr-10 h-12 border-gray-300 dark:border-gray-600 focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400"
                       {...register('password')}
                     />
                     <button
                       type="button"
-                      className="absolute right-3 top-3 h-4 w-4 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
                       onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <EyeOff /> : <Eye />}
                     </button>
                   </div>
                   {errors.password && (
-                    <p className="text-sm text-red-600">{errors.password.message}</p>
+                    <p className="text-sm text-red-600 dark:text-red-400">{errors.password.message}</p>
                   )}
                 </div>
 
                 <div className="flex items-center justify-between">
                   <Link
                     href="/auth/forgot-password"
-                    className="text-sm text-blue-600 hover:text-blue-800 font-medium"
+                    className="text-sm text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 font-medium"
                   >
                     Lupa password?
                   </Link>
@@ -175,11 +179,11 @@ export default function LoginPage() {
               </form>
 
               <div className="text-center">
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Belum punya akun?{' '}
                   <Link
                     href="/auth/register"
-                    className="font-medium text-blue-600 hover:text-blue-800"
+                    className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                   >
                     Daftar sekarang
                   </Link>

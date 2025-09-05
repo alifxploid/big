@@ -33,16 +33,16 @@ export function ForgotPasswordBuyer({ onSubmit, isLoading }: ForgotPasswordBuyer
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="buyer-email" className="text-sm font-medium text-gray-900">
+        <Label htmlFor="buyer-email" className="text-sm font-medium text-gray-900 dark:text-white">
           Email Pembeli
         </Label>
         <div className="relative">
-          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
           <Input
             id="buyer-email"
             type="email"
             placeholder="pembeli@email.com"
-            className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+            className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-blue-500 focus:ring-blue-500"
             {...register('email')}
           />
         </div>
@@ -54,7 +54,11 @@ export function ForgotPasswordBuyer({ onSubmit, isLoading }: ForgotPasswordBuyer
       <ShimmerButton
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gray-900 text-white hover:bg-gray-800"
+        className="w-full bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600 dark:[background:var(--dark-bg,var(--bg))]"
+        style={{
+          '--bg': 'rgba(17, 24, 39, 1)',
+          '--dark-bg': 'rgba(55, 65, 81, 1)'
+        } as React.CSSProperties}
         shimmerColor="#ffffff"
         background="rgba(17, 24, 39, 1)"
       >

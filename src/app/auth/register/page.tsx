@@ -20,12 +20,12 @@ export default function RegisterPage() {
           borderWidth={2}
           duration={8}
         >
-          <Card className="border-0 shadow-2xl bg-white rounded-lg">
+          <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800 rounded-lg">
             <CardHeader className="space-y-1 text-center">
-              <CardTitle className="text-3xl font-bold text-gray-900">
+              <CardTitle className="text-3xl font-bold text-gray-900 dark:text-white">
                 Daftar Akun
               </CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardDescription className="text-gray-600 dark:text-gray-300">
                 Pilih jenis akun yang ingin Anda buat
               </CardDescription>
             </CardHeader>
@@ -48,27 +48,27 @@ export default function RegisterPage() {
                 
                 <TabsContent value="buyer" className="space-y-4">
                   <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Akun Pembeli</h3>
-                    <p className="text-sm text-gray-600">Untuk berbelanja dan mencari produk</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Akun Pembeli</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Untuk berbelanja dan mencari produk</p>
                   </div>
                   <RegisterBuyer />
                 </TabsContent>
                 
                 <TabsContent value="seller" className="space-y-4">
                   <div className="text-center mb-4">
-                    <h3 className="text-lg font-semibold text-gray-900">Akun Penjual</h3>
-                    <p className="text-sm text-gray-600">Untuk menjual produk dan mengelola toko</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Akun Penjual</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">Untuk menjual produk dan mengelola toko</p>
                   </div>
                   <RegisterSeller />
                 </TabsContent>
               </Tabs>
 
-              <div className="text-center pt-4 border-t border-gray-200">
-                <p className="text-sm text-gray-600">
+              <div className="text-center pt-4 border-t border-gray-200 dark:border-gray-600">
+                <p className="text-sm text-gray-600 dark:text-gray-300">
                   Sudah punya akun?{' '}
                   <Link
                     href="/auth/login"
-                    className="font-medium text-blue-600 hover:text-blue-800"
+                    className="font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                   >
                     Masuk sekarang
                   </Link>

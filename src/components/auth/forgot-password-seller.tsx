@@ -34,16 +34,16 @@ export function ForgotPasswordSeller({ onSubmit, isLoading }: ForgotPasswordSell
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div className="space-y-2">
-        <Label htmlFor="seller-email" className="text-sm font-medium text-gray-900">
+        <Label htmlFor="seller-email" className="text-sm font-medium text-gray-900 dark:text-white">
           Email Penjual
         </Label>
         <div className="relative">
-          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
           <Input
             id="seller-email"
             type="email"
             placeholder="penjual@email.com"
-            className="pl-10 h-12 border-gray-300 focus:border-green-500 focus:ring-green-500"
+            className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-green-500 focus:ring-green-500"
             {...register('email')}
           />
         </div>
@@ -53,23 +53,23 @@ export function ForgotPasswordSeller({ onSubmit, isLoading }: ForgotPasswordSell
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="store-name" className="text-sm font-medium text-gray-900">
+        <Label htmlFor="store-name" className="text-sm font-medium text-gray-900 dark:text-white">
           Nama Toko (Opsional)
         </Label>
         <div className="relative">
-          <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+          <Store className="absolute left-3 top-3 h-4 w-4 text-gray-400 dark:text-gray-500" />
           <Input
             id="store-name"
             type="text"
             placeholder="Nama toko Anda"
-            className="pl-10 h-12 border-gray-300 focus:border-green-500 focus:ring-green-500"
+            className="pl-10 h-12 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:border-green-500 focus:ring-green-500"
             {...register('storeName')}
           />
         </div>
         {errors.storeName && (
           <p className="text-sm text-red-600">{errors.storeName.message}</p>
         )}
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-gray-500 dark:text-gray-400">
           Masukkan nama toko untuk membantu identifikasi akun penjual Anda
         </p>
       </div>
@@ -77,7 +77,11 @@ export function ForgotPasswordSeller({ onSubmit, isLoading }: ForgotPasswordSell
       <ShimmerButton
         type="submit"
         disabled={isLoading}
-        className="w-full bg-gray-900 text-white hover:bg-gray-800"
+        className="w-full bg-gray-900 dark:bg-gray-700 text-white hover:bg-gray-800 dark:hover:bg-gray-600 dark:text-white dark:border-gray-600 dark:[background:var(--dark-bg,var(--bg))]"
+        style={{
+          '--bg': 'rgba(17, 24, 39, 1)',
+          '--dark-bg': 'rgba(55, 65, 81, 1)'
+        } as React.CSSProperties}
         shimmerColor="#ffffff"
         background="rgba(17, 24, 39, 1)"
       >

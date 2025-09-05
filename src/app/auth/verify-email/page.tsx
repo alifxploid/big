@@ -76,15 +76,15 @@ function VerifyEmailContent() {
             borderWidth={2}
             duration={8}
           >
-            <Card className="border-0 shadow-2xl">
+            <Card className="border-0 shadow-2xl bg-white dark:bg-gray-800">
               <CardHeader className="space-y-1 text-center">
-                <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
+                <div className="mx-auto w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                  <Loader2 className="w-6 h-6 text-blue-600 dark:text-blue-400 animate-spin" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Memverifikasi Email...
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Mohon tunggu, kami sedang memverifikasi email Anda
                 </CardDescription>
               </CardHeader>
@@ -102,20 +102,20 @@ function VerifyEmailContent() {
           >
             <Card className="border-0 shadow-2xl">
               <CardHeader className="space-y-1 text-center">
-                <div className="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
-                  <CheckCircle className="w-6 h-6 text-green-600" />
+                <div className="mx-auto w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+                  <CheckCircle className="w-6 h-6 text-green-600 dark:text-green-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Email Berhasil Diverifikasi!
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Akun Anda telah aktif dan siap digunakan
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-green-50 p-4 rounded-lg">
-                    <p className="text-sm text-green-800">
+                  <div className="bg-green-50 dark:bg-green-900/20 p-4 rounded-lg">
+                    <p className="text-sm text-green-800 dark:text-green-300">
                       Selamat! Email Anda telah berhasil diverifikasi. Anda sekarang dapat menggunakan semua fitur platform kami.
                     </p>
                   </div>
@@ -145,20 +145,20 @@ function VerifyEmailContent() {
           >
             <Card className="border-0 shadow-2xl">
               <CardHeader className="space-y-1 text-center">
-                <div className="mx-auto w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mb-4">
-                  <XCircle className="w-6 h-6 text-red-600" />
+                <div className="mx-auto w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mb-4">
+                  <XCircle className="w-6 h-6 text-red-600 dark:text-red-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Verifikasi Gagal
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Link verifikasi tidak valid atau telah kedaluwarsa
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-red-50 p-4 rounded-lg">
-                    <p className="text-sm text-red-800">
+                  <div className="bg-red-50 dark:bg-red-900/20 p-4 rounded-lg">
+                    <p className="text-sm text-red-800 dark:text-red-300">
                       Link verifikasi yang Anda gunakan tidak valid. Silakan minta link verifikasi baru.
                     </p>
                   </div>
@@ -177,7 +177,7 @@ function VerifyEmailContent() {
 
                   <Link
                     href="/auth/login"
-                    className="block w-full text-center py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
+                    className="block w-full text-center py-3 px-4 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 border border-blue-200 dark:border-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                   >
                     Kembali ke Login
                   </Link>
@@ -197,20 +197,20 @@ function VerifyEmailContent() {
           >
             <Card className="border-0 shadow-2xl">
               <CardHeader className="space-y-1 text-center">
-                <div className="mx-auto w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
-                  <Mail className="w-6 h-6 text-yellow-600" />
+                <div className="mx-auto w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4">
+                  <Mail className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Link Kedaluwarsa
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Link verifikasi telah kedaluwarsa
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-yellow-50 p-4 rounded-lg">
-                    <p className="text-sm text-yellow-800">
+                  <div className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg">
+                    <p className="text-sm text-yellow-800 dark:text-yellow-300">
                       Link verifikasi email telah kedaluwarsa. Silakan minta link verifikasi baru untuk melanjutkan.
                     </p>
                   </div>
@@ -250,23 +250,23 @@ function VerifyEmailContent() {
           >
             <Card className="border-0 shadow-2xl">
               <CardHeader className="space-y-1 text-center">
-                <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
-                  <Mail className="w-6 h-6 text-blue-600" />
+                <div className="mx-auto w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4">
+                  <Mail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
                 </div>
-                <CardTitle className="text-2xl font-bold text-gray-900">
+                <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                   Verifikasi Email Anda
                 </CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardDescription className="text-gray-600 dark:text-gray-300">
                   Kami telah mengirim email verifikasi ke alamat email Anda
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="text-center space-y-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <p className="text-sm text-blue-800 mb-2">
+                  <div className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
+                    <p className="text-sm text-blue-800 dark:text-blue-300 mb-2">
                       Silakan cek email Anda dan klik link verifikasi yang kami kirim.
                     </p>
-                    <p className="text-sm text-blue-800">
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
                       Jika tidak menerima email, cek folder spam atau kirim ulang email verifikasi.
                     </p>
                   </div>
@@ -285,7 +285,7 @@ function VerifyEmailContent() {
 
                   <Link
                     href="/auth/login"
-                    className="inline-flex items-center justify-center w-full py-3 px-4 text-sm font-medium text-blue-600 hover:text-blue-800 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors"
+                    className="inline-flex items-center justify-center w-full py-3 px-4 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 border border-blue-200 dark:border-blue-600 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                   >
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Kembali ke Login
@@ -322,10 +322,10 @@ function LoadingFallback() {
               <div className="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
                 <Loader2 className="w-6 h-6 text-blue-600 animate-spin" />
               </div>
-              <CardTitle className="text-2xl font-bold text-gray-900">
+              <CardTitle className="text-2xl font-bold text-gray-900 dark:text-white">
                 Memuat...
               </CardTitle>
-              <CardDescription className="text-gray-600">
+              <CardDescription className="text-gray-600 dark:text-gray-300">
                 Mohon tunggu sebentar
               </CardDescription>
             </CardHeader>
