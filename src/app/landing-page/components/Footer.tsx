@@ -55,7 +55,7 @@ const socialMedia = [
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900" aria-labelledby="footer-heading">
+    <footer className="bg-gray-50 dark:bg-gray-900" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
@@ -65,10 +65,10 @@ export default function Footer() {
           {/* Company Info */}
           <div className="space-y-8">
             <div>
-              <Link href="#" className="text-2xl font-bold text-white">
+              <Link href="#" className="text-2xl font-bold text-gray-900 dark:text-white">
                 AllInOne
               </Link>
-              <p className="mt-4 text-sm leading-6 text-gray-300">
+              <p className="mt-4 text-sm leading-6 text-gray-600 dark:text-gray-300">
                 Platform e-commerce all-in-one yang menggabungkan keamanan rekber, 
                 kekuatan SMM, dan kemudahan PPOB dalam satu solusi terpadu.
               </p>
@@ -76,15 +76,15 @@ export default function Footer() {
             
             {/* Contact Info */}
             <div className="space-y-3">
-              <div className="flex items-center space-x-3 text-sm text-gray-300">
+              <div className="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-300">
                 <Mail className="h-4 w-4" />
                 <span>support@allinone.com</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-gray-300">
+              <div className="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-300">
                 <Phone className="h-4 w-4" />
                 <span>+62 812-3456-7890</span>
               </div>
-              <div className="flex items-center space-x-3 text-sm text-gray-300">
+              <div className="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-300">
                 <MapPin className="h-4 w-4" />
                 <span>Jakarta, Indonesia</span>
               </div>
@@ -98,7 +98,7 @@ export default function Footer() {
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-gray-400 hover:text-gray-300 transition-colors"
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 transition-colors"
                   >
                     <span className="sr-only">{item.name}</span>
                     <IconComponent className="h-6 w-6" />
@@ -112,13 +112,13 @@ export default function Footer() {
           <div className="mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Layanan</h3>
+                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Layanan</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.layanan.map((item) => (
                     <li key={item.name}>
                       <a
                         href={item.href}
-                        className="text-sm leading-6 text-gray-300 hover:text-white transition-colors"
+                        className="text-sm leading-6 text-gray-600 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white transition-colors"
                       >
                         {item.name}
                       </a>
@@ -128,7 +128,7 @@ export default function Footer() {
               </div>
               
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Perusahaan</h3>
+                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Perusahaan</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.perusahaan.map((item) => (
                     <li key={item.name}>
@@ -146,7 +146,7 @@ export default function Footer() {
             
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold leading-6 text-white">Dukungan</h3>
+                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Dukungan</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.dukungan.map((item) => (
                     <li key={item.name}>
@@ -162,7 +162,7 @@ export default function Footer() {
               </div>
               
               <div className="mt-10 md:mt-0">
-                <h3 className="text-sm font-semibold leading-6 text-white">Legal</h3>
+                <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white">Legal</h3>
                 <ul role="list" className="mt-6 space-y-4">
                   {navigation.legal.map((item) => (
                     <li key={item.name}>
@@ -181,13 +181,13 @@ export default function Footer() {
         </div>
         
         {/* Newsletter Subscription */}
-        <div className="mt-16 border-t border-gray-700 pt-8">
+        <div className="mt-16 border-t border-gray-200 dark:border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between">
             <div className="mb-6 md:mb-0">
-              <h3 className="text-sm font-semibold leading-6 text-white mb-2">
+              <h3 className="text-sm font-semibold leading-6 text-gray-900 dark:text-white mb-2">
                 Berlangganan Newsletter
               </h3>
-              <p className="text-sm text-gray-300">
+              <p className="text-sm text-gray-600 dark:text-gray-300">
                 Dapatkan update terbaru tentang fitur dan promo menarik.
               </p>
             </div>
@@ -196,7 +196,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Masukkan email Anda"
-                className="min-w-0 flex-auto rounded-l-md border-0 bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
+                className="min-w-0 flex-auto rounded-l-md border-0 bg-gray-100 dark:bg-white/5 px-3.5 py-2 text-gray-900 dark:text-white shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-white/10 focus:ring-2 focus:ring-inset focus:ring-blue-500 sm:text-sm sm:leading-6"
               />
               <button
                 type="submit"
@@ -209,14 +209,14 @@ export default function Footer() {
         </div>
         
         {/* Bottom Bar */}
-        <div className="mt-8 border-t border-gray-700 pt-8 md:flex md:items-center md:justify-between">
+        <div className="mt-8 border-t border-gray-200 dark:border-gray-700 pt-8 md:flex md:items-center md:justify-between">
           <div className="flex space-x-6 md:order-2">
-            <p className="text-xs leading-5 text-gray-400">
+            <p className="text-xs leading-5 text-gray-500 dark:text-gray-400">
               Terdaftar dan diawasi oleh OJK
             </p>
           </div>
           
-          <p className="mt-8 text-xs leading-5 text-gray-400 md:order-1 md:mt-0">
+          <p className="mt-8 text-xs leading-5 text-gray-500 dark:text-gray-400 md:order-1 md:mt-0">
             &copy; 2024 AllInOne Platform. All rights reserved.
           </p>
         </div>

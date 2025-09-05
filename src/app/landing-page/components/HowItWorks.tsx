@@ -75,13 +75,13 @@ export default function HowItWorks() {
   const [activeTab, setActiveTab] = useState('inside')
 
   return (
-    <section id="how-it-works" className="py-24 bg-white">
+    <section id="how-it-works" className="py-24 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             Cara Kerja Rekber
           </h2>
-          <p className="mt-4 text-lg leading-8 text-gray-600">
+          <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
             Dua jalur rekber yang fleksibel untuk semua kebutuhan transaksi online Anda
           </p>
         </div>
@@ -102,10 +102,10 @@ export default function HowItWorks() {
                 <Badge variant="default" className="mb-4">
                   Transaksi dalam Platform
                 </Badge>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
                   Rekber Inside
                 </h3>
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                   Untuk transaksi produk yang tersedia di marketplace internal kami. 
                   Proses otomatis dan terintegrasi penuh.
                 </p>
@@ -115,25 +115,25 @@ export default function HowItWorks() {
                 {insideSteps.map((step, index) => {
                   const IconComponent = step.icon
                   return (
-                    <Card key={index} className="relative border-2 hover:border-blue-200 transition-colors">
+                    <Card key={index} className="relative border-2 hover:border-blue-200 dark:hover:border-blue-700 transition-colors bg-white dark:bg-gray-800">
                       <CardHeader className="text-center pb-4">
                         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 mb-4">
                           <IconComponent className="h-8 w-8 text-white" />
                         </div>
                         <div className="absolute -top-3 left-4">
-                          <Badge variant="outline" className="bg-white">
+                          <Badge variant="outline" className="bg-white dark:bg-gray-800">
                             {index + 1}
                           </Badge>
                         </div>
-                        <CardTitle className="text-lg font-semibold text-gray-900">
+                        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
                           {step.title}
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="text-center pt-0">
-                        <CardDescription className="text-gray-600 mb-3">
+                        <CardDescription className="text-gray-600 dark:text-gray-300 mb-3">
                           {step.description}
                         </CardDescription>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           {step.details}
                         </p>
                       </CardContent>
@@ -148,10 +148,10 @@ export default function HowItWorks() {
                 <Badge variant="secondary" className="mb-4">
                   Transaksi Eksternal
                 </Badge>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
                   Rekber Outside
                 </h3>
-                <p className="text-gray-600 max-w-2xl mx-auto">
+                <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                   Untuk transaksi yang berasal dari platform lain seperti Facebook, Instagram, 
                   atau marketplace lainnya. Verifikasi manual untuk keamanan maksimal.
                 </p>
@@ -161,25 +161,25 @@ export default function HowItWorks() {
                 {outsideSteps.map((step, index) => {
                   const IconComponent = step.icon
                   return (
-                    <Card key={index} className="relative border-2 hover:border-blue-200 transition-colors">
+                    <Card key={index} className="relative border-2 hover:border-blue-200 dark:hover:border-blue-700 transition-colors bg-white dark:bg-gray-800">
                       <CardHeader className="text-center pb-4">
                         <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 mb-4">
                           <IconComponent className="h-8 w-8 text-white" />
                         </div>
                         <div className="absolute -top-3 left-4">
-                          <Badge variant="outline" className="bg-white">
+                          <Badge variant="outline" className="bg-white dark:bg-gray-800">
                             {index + 1}
                           </Badge>
                         </div>
-                        <CardTitle className="text-lg font-semibold text-gray-900">
+                        <CardTitle className="text-lg font-semibold text-gray-900 dark:text-white">
                           {step.title}
                         </CardTitle>
                       </CardHeader>
                       <CardContent className="text-center pt-0">
-                        <CardDescription className="text-gray-600 mb-3">
+                        <CardDescription className="text-gray-600 dark:text-gray-300 mb-3">
                           {step.description}
                         </CardDescription>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-500 dark:text-gray-400">
                           {step.details}
                         </p>
                       </CardContent>
@@ -191,11 +191,11 @@ export default function HowItWorks() {
           </Tabs>
           
           <div className="mt-16 text-center">
-            <div className="bg-gray-50 rounded-2xl p-8">
-              <h4 className="text-xl font-semibold text-gray-900 mb-4">
+            <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-8">
+              <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-4">
                 Siap Memulai Transaksi Aman?
               </h4>
-              <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
+              <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
                 Pilih jenis rekber yang sesuai dengan kebutuhan Anda. 
                 Tim support kami siap membantu 24/7.
               </p>

@@ -10,7 +10,7 @@ const Circle = forwardRef<HTMLDivElement, { className?: string; children: React.
     <div
       ref={ref}
       className={cn(
-        'z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-white p-4 shadow-lg hover:shadow-xl transition-shadow duration-300',
+        'z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 bg-white dark:bg-gray-800 p-4 shadow-lg hover:shadow-xl transition-shadow duration-300',
         className,
       )}
     >
@@ -34,8 +34,8 @@ const FeatureIcon = forwardRef<HTMLDivElement, {
         {icon}
       </Circle>
       <div className="space-y-1">
-        <p className="text-sm font-semibold text-gray-900">{label}</p>
-        <p className="text-xs text-gray-600 max-w-20">{description}</p>
+        <p className="text-sm font-semibold text-gray-900 dark:text-white">{label}</p>
+        <p className="text-xs text-gray-600 dark:text-gray-300 max-w-20">{description}</p>
       </div>
     </div>
   )
@@ -51,20 +51,20 @@ export default function BeamSection() {
   const div4Ref = useRef<HTMLDivElement>(null)
 
   return (
-    <section className="py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section className="py-24 bg-gradient-to-br from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center mb-16">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          <h2 className="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             Ekosistem Terintegrasi
           </h2>
-          <p className="mt-4 text-lg leading-8 text-gray-600">
+          <p className="mt-4 text-lg leading-8 text-gray-600 dark:text-gray-300">
             Semua layanan terhubung dalam satu platform yang powerful dan mudah digunakan
           </p>
         </div>
         
         <div className="relative">
           <div
-            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-2xl border bg-white p-10 md:shadow-xl"
+            className="relative flex h-[500px] w-full items-center justify-center overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-10 md:shadow-xl"
             ref={containerRef}
           >
             {/* Grid 3 baris: atas, tengah (pusat), bawah */}
@@ -151,22 +151,22 @@ export default function BeamSection() {
         
         <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-3">
           <div className="text-center">
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Sinkronisasi Real-time</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Sinkronisasi Real-time</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Semua transaksi dan aktivitas tersinkronisasi secara real-time di seluruh platform
             </p>
           </div>
           
           <div className="text-center">
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Dashboard Terpadu</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Dashboard Terpadu</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Kelola semua layanan dari satu dashboard yang intuitif dan mudah digunakan
             </p>
           </div>
           
           <div className="text-center">
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">API Integration</h4>
-            <p className="text-sm text-gray-600">
+            <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">API Integration</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
               Integrasi mudah dengan sistem existing melalui API yang powerful dan dokumentasi lengkap
             </p>
           </div>
