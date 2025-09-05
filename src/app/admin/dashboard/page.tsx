@@ -118,12 +118,12 @@ export default function AdminDashboard() {
         <div className="mb-10">
           <div className="space-y-4">
             <div className="flex items-center gap-4">
-              <h2 className="text-4xl font-black text-slate-900 tracking-tight">
+              <h2 className="text-4xl font-black text-foreground tracking-tight">
                 DASHBOARD
               </h2>
-              <div className="h-1 flex-1 bg-gradient-to-r from-slate-900 to-transparent rounded-full max-w-32"></div>
+              <div className="h-1 flex-1 bg-gradient-to-r from-foreground to-transparent rounded-full max-w-32"></div>
             </div>
-            <p className="text-slate-600 font-medium uppercase tracking-wider text-sm">
+            <p className="text-muted-foreground font-medium uppercase tracking-wider text-sm">
               PLATFORM MANAGEMENT CONTROL CENTER
             </p>
           </div>
@@ -164,8 +164,8 @@ export default function AdminDashboard() {
           <Card className="border-2">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3">
-                <div className="p-2 bg-blue-100 rounded-lg">
-                  <Users className="h-5 w-5 text-blue-600" />
+                <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                  <Users className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div>
                   <span className="text-lg font-semibold">User Management</span>
@@ -194,8 +194,8 @@ export default function AdminDashboard() {
           <Card className="border-2">
             <CardHeader className="pb-4">
               <CardTitle className="flex items-center space-x-3">
-                <div className="p-2 bg-green-100 rounded-lg">
-                  <BarChart3 className="h-5 w-5 text-green-600" />
+                <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                  <BarChart3 className="h-5 w-5 text-green-600 dark:text-green-400" />
                 </div>
                 <div>
                   <span className="text-lg font-semibold">Analytics</span>

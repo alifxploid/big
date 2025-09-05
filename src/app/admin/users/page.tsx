@@ -23,8 +23,8 @@ export default function UsersPage() {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-3">
-              <div className="p-2 bg-green-100 rounded-lg">
-                <ShoppingBag className="h-5 w-5 text-green-600" />
+              <div className="p-2 bg-green-100 dark:bg-green-900/20 rounded-lg">
+                <ShoppingBag className="h-5 w-5 text-green-600 dark:text-green-400" />
               </div>
               <span>Users Seller</span>
             </CardTitle>
@@ -45,8 +45,8 @@ export default function UsersPage() {
         <Card className="hover:shadow-lg transition-shadow">
           <CardHeader>
             <CardTitle className="flex items-center gap-3">
-              <div className="p-2 bg-blue-100 rounded-lg">
-                <ShoppingCart className="h-5 w-5 text-blue-600" />
+              <div className="p-2 bg-blue-100 dark:bg-blue-900/20 rounded-lg">
+                <ShoppingCart className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               </div>
               <span>Users Buyer</span>
             </CardTitle>

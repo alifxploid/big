@@ -13,6 +13,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { AnimatedThemeToggler } from '@/components/magicui/animated-theme-toggler'
 import {
   Bell,
   Settings,
@@ -68,6 +69,9 @@ export function AdminNavbar({
         <div className="flex flex-1 items-center justify-end space-x-2">
           {/* Right side actions */}
           <nav className="flex items-center space-x-2">
+            {/* Theme toggler */}
+            <AnimatedThemeToggler className="h-8 w-8" />
+            
             {/* Notifications */}
             <Button variant="ghost" size="sm" className="h-8 w-8 px-0">
               <Bell className="h-4 w-4" />
