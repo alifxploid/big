@@ -88,6 +88,20 @@ const navigationItems = [
     title: 'Reports',
     url: '/admin/reports',
     icon: FileText,
+    items: [
+      {
+        title: 'Ecommerce',
+        url: '/admin/reports/ecommerce',
+      },
+      {
+        title: 'Panel SMM',
+        url: '/admin/reports/panel-smm',
+      },
+      {
+        title: 'Pulsa PPOB',
+        url: '/admin/reports/pulsa-ppob',
+      },
+    ],
   },
 ]
 

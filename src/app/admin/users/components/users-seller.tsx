@@ -47,6 +47,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   ShoppingBag,
   TrendingUp,
@@ -330,32 +331,43 @@ export function UsersSeller() {
         </div>
         
         <div className="p-6 pt-0">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Seller</TableHead>
-                <TableHead>Store Name</TableHead>
-                <TableHead>Products</TableHead>
-                <TableHead>Revenue</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Join Date</TableHead>
-                <TableHead className="text-right">Actions</TableHead>
-              </TableRow>
-            </TableHeader>
+          <div className="rounded-md border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Seller</TableHead>
+                  <TableHead>Store Name</TableHead>
+                  <TableHead>Products</TableHead>
+                  <TableHead>Revenue</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Join Date</TableHead>
+                  <TableHead className="text-right">Actions</TableHead>
+                </TableRow>
+              </TableHeader>
             <TableBody>
               {paginatedSellers.map((seller) => (
                 <TableRow key={seller.id}>
                   <TableCell>
-                    <div className="space-y-1">
-                      <p className="text-sm font-medium leading-none">{seller.name}</p>
-                      <p className="text-sm text-muted-foreground">{seller.email}</p>
+                    <div className="flex items-center space-x-3">
+                      <Avatar className="h-8 w-8">
+                        <AvatarImage src={`/avatars/${seller.id}.jpg`} />
+                        <AvatarFallback>{seller.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="font-medium">{seller.name}</div>
+                        <div className="text-sm text-muted-foreground">{seller.email}</div>
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell>{seller.storeName}</TableCell>
                   <TableCell>{seller.products}</TableCell>
-                  <TableCell>{seller.revenue}</TableCell>
-                  <TableCell>{getStatusBadge(seller.status)}</TableCell>
-                  <TableCell>{new Date(seller.joinDate).toLocaleDateString()}</TableCell>
+                  <TableCell>${seller.revenue.toLocaleString()}</TableCell>
+                  <TableCell>
+                    <Badge variant={seller.status === 'active' ? 'default' : seller.status === 'banned' ? 'destructive' : 'secondary'}>
+                      {seller.status}
+                    </Badge>
+                  </TableCell>
+                  <TableCell>{seller.joinDate}</TableCell>
                   <TableCell className="text-right">
                     <DropdownMenu>
                       <DropdownMenuTrigger asChild>
@@ -427,7 +439,8 @@ export function UsersSeller() {
                 </TableRow>
               ))}
             </TableBody>
-          </Table>
+            </Table>
+          </div>
           
           {/* Pagination */}
           {totalPages > 1 && (

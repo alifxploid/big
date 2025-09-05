@@ -47,6 +47,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   ShoppingCart,
   TrendingUp,
@@ -302,14 +303,14 @@ export function UsersBuyer() {
       <div className="rounded-lg border bg-card">
         <div className="p-6">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-lg font-semibold">Buyers Management</h2>
+            <h2 className="text-2xl font-bold tracking-tight">Buyers Management</h2>
             <div className="flex gap-2">
-              <Button variant="outline" size="sm">
-                <Download className="h-4 w-4 mr-2" />
+              <Button variant="outline">
+                <Download className="mr-2 h-4 w-4" />
                 Export
               </Button>
-              <Button size="sm">
-                <Plus className="h-4 w-4 mr-2" />
+              <Button>
+                <Plus className="mr-2 h-4 w-4" />
                 Add Buyer
               </Button>
             </div>
@@ -318,24 +319,22 @@ export function UsersBuyer() {
           {/* Search and Filter */}
           <div className="flex gap-4 mb-6">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder="Search buyers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-8"
               />
             </div>
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger className="w-[180px]">
-                <Filter className="h-4 w-4 mr-2" />
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
                 <SelectItem value="active">Active</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="suspended">Suspended</SelectItem>
+                <SelectItem value="inactive">Inactive</SelectItem>
                 <SelectItem value="banned">Banned</SelectItem>
               </SelectContent>
             </Select>
@@ -353,30 +352,29 @@ export function UsersBuyer() {
                   <TableHead>Status</TableHead>
                   <TableHead>Join Date</TableHead>
                   <TableHead>Last Active</TableHead>
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead>Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {paginatedBuyers.map((buyer) => (
                   <TableRow key={buyer.id}>
                     <TableCell>
-                      <div className="flex items-center gap-3">
-                        <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="text-xs font-medium">
-                            {buyer.name.split(' ').map(n => n[0]).join('')}
-                          </span>
-                        </div>
+                      <div className="flex items-center space-x-3">
+                        <Avatar className="h-8 w-8">
+                          <AvatarImage src={`/avatars/${buyer.id}.jpg`} />
+                          <AvatarFallback>{buyer.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                        </Avatar>
                         <div>
-                          <p className="font-medium">{buyer.name}</p>
-                          <p className="text-sm text-muted-foreground">{buyer.email}</p>
+                          <div className="font-medium">{buyer.name}</div>
+                          <div className="text-sm text-muted-foreground">{buyer.email}</div>
                         </div>
                       </div>
                     </TableCell>
                     <TableCell>{buyer.orders}</TableCell>
-                    <TableCell>{buyer.totalSpent}</TableCell>
+                    <TableCell>${buyer.totalSpent.toLocaleString()}</TableCell>
                     <TableCell>{buyer.wishlistItems}</TableCell>
                     <TableCell>
-                      <Badge className={getStatusBadge(buyer.status)}>
+                      <Badge variant={buyer.status === 'active' ? 'default' : buyer.status === 'banned' ? 'destructive' : 'secondary'}>
                         {buyer.status}
                       </Badge>
                     </TableCell>
@@ -421,36 +419,44 @@ export function UsersBuyer() {
           </div>
           
           {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-4">
-              <p className="text-sm text-muted-foreground">
-                Showing {startIndex + 1} to {Math.min(startIndex + itemsPerPage, filteredBuyers.length)} of {filteredBuyers.length} buyers
-              </p>
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setCurrentPage(currentPage - 1)}
-                  disabled={currentPage === 1}
-                >
-                  <ChevronLeft className="h-4 w-4" />
-                  Previous
-                </Button>
-                <span className="text-sm">
-                  Page {currentPage} of {totalPages}
-                </span>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setCurrentPage(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                >
-                  Next
-                  <ChevronRight className="h-4 w-4" />
-                </Button>
-              </div>
+          <div className="flex items-center justify-between mt-6">
+            <div className="text-sm text-muted-foreground">
+              Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredBuyers.length)} of {filteredBuyers.length} buyers
             </div>
-          )}
+            <div className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                disabled={currentPage === 1}
+              >
+                <ChevronLeft className="h-4 w-4" />
+                Previous
+              </Button>
+              <div className="flex items-center gap-1">
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                  <Button
+                    key={page}
+                    variant={currentPage === page ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setCurrentPage(page)}
+                    className="w-8 h-8 p-0"
+                  >
+                    {page}
+                  </Button>
+                ))}
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                disabled={currentPage === totalPages}
+              >
+                Next
+                <ChevronRight className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
 
