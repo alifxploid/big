@@ -49,16 +49,6 @@ const navigationItems = [
     title: 'Users',
     url: '/admin/users',
     icon: Users,
-    items: [
-      {
-        title: 'Users Seller',
-        url: '/admin/users/seller',
-      },
-      {
-        title: 'Users Buyer',
-        url: '/admin/users/buyer',
-      },
-    ],
   },
   {
     title: 'Analytics',
@@ -76,6 +66,30 @@ const navigationItems = [
       {
         title: 'Pulsa PPOB',
         url: '/admin/analytics/pulsa-ppob',
+      },
+      {
+        title: 'Sewa SMM',
+        url: '/admin/analytics/sewa-smm',
+      },
+      {
+        title: 'Sewa PPOB',
+        url: '/admin/analytics/sewa-ppob',
+      },
+      {
+        title: 'API Tools',
+        url: '/admin/analytics/api-tools',
+      },
+      {
+        title: 'OTP',
+        url: '/admin/analytics/otp',
+      },
+      {
+        title: 'Tools Sosmed',
+        url: '/admin/analytics/tools-sosmed',
+      },
+      {
+        title: 'Payment Gateway',
+        url: '/admin/analytics/payment-gateway',
       },
     ],
   },
@@ -100,6 +114,30 @@ const navigationItems = [
       {
         title: 'Pulsa PPOB',
         url: '/admin/reports/pulsa-ppob',
+      },
+      {
+        title: 'Sewa SMM',
+        url: '/admin/reports/sewa-smm',
+      },
+      {
+        title: 'Sewa PPOB',
+        url: '/admin/reports/sewa-ppob',
+      },
+      {
+        title: 'API Tools',
+        url: '/admin/reports/api-tools',
+      },
+      {
+        title: 'OTP',
+        url: '/admin/reports/otp',
+      },
+      {
+        title: 'Tools Sosmed',
+        url: '/admin/reports/tools-sosmed',
+      },
+      {
+        title: 'Payment Gateway',
+        url: '/admin/reports/payment-gateway',
       },
     ],
   },
@@ -133,9 +171,9 @@ export function AdminSidebar() {
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
             <Shield className="h-4 w-4 text-primary-foreground" />
           </div>
-          <div className="grid flex-1 text-left text-sm leading-tight">
-            <span className="truncate font-semibold">Admin Panel</span>
-            <span className="truncate text-xs text-muted-foreground">Big Platform</span>
+          <div className="grid flex-1 text-left text-base leading-tight">
+            <span className="truncate font-bold">Admin Panel</span>
+            <span className="truncate text-sm text-muted-foreground">Big Platform</span>
           </div>
         </div>
       </SidebarHeader>
@@ -165,7 +203,7 @@ export function AdminSidebar() {
         </div>
         
         <SidebarGroup>
-          <SidebarGroupLabel>Navigation</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm font-semibold">Navigation</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {navigationItems.map((item) => {
@@ -175,8 +213,8 @@ export function AdminSidebar() {
                     {item.items ? (
                       <Collapsible className="group/collapsible">
                         <CollapsibleTrigger asChild>
-                          <SidebarMenuButton isActive={isActive}>
-                            <item.icon className="h-4 w-4" />
+                          <SidebarMenuButton size="lg" isActive={isActive} className="text-base font-medium">
+                            <item.icon className="h-5 w-5" />
                             <span>{item.title}</span>
                             <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
                           </SidebarMenuButton>
@@ -185,7 +223,7 @@ export function AdminSidebar() {
                           <SidebarMenuSub>
                             {item.items.map((subItem) => (
                               <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton asChild>
+                                <SidebarMenuSubButton asChild className="text-sm font-medium">
                                   <Link href={subItem.url}>
                                     <span>{subItem.title}</span>
                                   </Link>
@@ -196,9 +234,9 @@ export function AdminSidebar() {
                         </CollapsibleContent>
                       </Collapsible>
                     ) : (
-                      <SidebarMenuButton asChild isActive={isActive}>
+                      <SidebarMenuButton asChild size="lg" isActive={isActive} className="text-base font-medium">
                         <Link href={item.url}>
-                          <item.icon className="h-4 w-4" />
+                          <item.icon className="h-5 w-5" />
                           <span>{item.title}</span>
                         </Link>
                       </SidebarMenuButton>
@@ -213,16 +251,16 @@ export function AdminSidebar() {
         <Separator />
         
         <SidebarGroup>
-          <SidebarGroupLabel>System</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-sm font-semibold">System</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {systemItems.map((item) => {
                 const isActive = pathname === item.url
                 return (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={isActive}>
+                    <SidebarMenuButton asChild size="lg" isActive={isActive} className="text-base font-medium">
                       <Link href={item.url}>
-                        <item.icon className="h-4 w-4" />
+                        <item.icon className="h-5 w-5" />
                         <span>{item.title}</span>
                       </Link>
                     </SidebarMenuButton>

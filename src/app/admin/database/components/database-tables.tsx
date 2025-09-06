@@ -58,10 +58,14 @@ import {
   RefreshCw,
   Database,
   Plus,
-  X
+  X,
+  Code,
+  CheckCircle
 } from 'lucide-react'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Switch } from '@/components/ui/switch'
 
 interface DatabaseTable {
   id: string
@@ -101,6 +105,7 @@ export function DatabaseTables() {
   const [tableToDelete, setTableToDelete] = useState<DatabaseTable | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
+  const [showSqlPreview, setShowSqlPreview] = useState(false)
   const [createForm, setCreateForm] = useState<CreateTableForm>({
     name: '',
     engine: 'InnoDB',
@@ -116,14 +121,36 @@ export function DatabaseTables() {
     }]
   })
 
-  // Mock data
+  // MySQL Data Types
+  const mysqlDataTypes = [
+    // Numeric Types
+    'TINYINT', 'SMALLINT', 'MEDIUMINT', 'INT', 'BIGINT',
+    'DECIMAL', 'NUMERIC', 'FLOAT', 'DOUBLE', 'BIT',
+    // String Types
+    'CHAR', 'VARCHAR', 'BINARY', 'VARBINARY',
+    'TINYBLOB', 'BLOB', 'MEDIUMBLOB', 'LONGBLOB',
+    'TINYTEXT', 'TEXT', 'MEDIUMTEXT', 'LONGTEXT',
+    // Date and Time Types
+    'DATE', 'TIME', 'DATETIME', 'TIMESTAMP', 'YEAR',
+    // JSON Type
+    'JSON',
+    // Spatial Types
+    'GEOMETRY', 'POINT', 'LINESTRING', 'POLYGON'
+  ]
+
+  // MySQL Storage Engines
+  const mysqlEngines = [
+    'InnoDB', 'MyISAM', 'Memory', 'Archive', 'CSV', 'Federated', 'NDB'
+  ]
+
+  // Enhanced MySQL Mock Data
   const [tables] = useState<DatabaseTable[]>([
     {
       id: '1',
       name: 'users',
       type: 'table',
-      records: 10234,
-      size: '45.2 MB',
+      records: 15847,
+      size: '52.3 MB',
       lastModified: '2024-01-15 14:30:00',
       status: 'active',
       engine: 'InnoDB'
@@ -132,8 +159,8 @@ export function DatabaseTables() {
       id: '2',
       name: 'products',
       type: 'table',
-      records: 5678,
-      size: '128.5 MB',
+      records: 8934,
+      size: '156.7 MB',
       lastModified: '2024-01-15 12:15:00',
       status: 'active',
       engine: 'InnoDB'
@@ -142,39 +169,139 @@ export function DatabaseTables() {
       id: '3',
       name: 'orders',
       type: 'table',
-      records: 23456,
-      size: '89.3 MB',
+      records: 34567,
+      size: '124.8 MB',
       lastModified: '2024-01-15 16:45:00',
       status: 'active',
       engine: 'InnoDB'
     },
     {
       id: '4',
+      name: 'order_items',
+      type: 'table',
+      records: 89234,
+      size: '78.9 MB',
+      lastModified: '2024-01-15 15:20:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '5',
+      name: 'categories',
+      type: 'table',
+      records: 156,
+      size: '2.1 MB',
+      lastModified: '2024-01-14 11:30:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '6',
       name: 'user_sessions',
       type: 'table',
-      records: 1234,
-      size: '12.1 MB',
+      records: 2847,
+      size: '18.4 MB',
       lastModified: '2024-01-15 10:20:00',
       status: 'maintenance',
       engine: 'Memory'
     },
     {
-      id: '5',
+      id: '7',
+      name: 'product_reviews',
+      type: 'table',
+      records: 12456,
+      size: '34.2 MB',
+      lastModified: '2024-01-15 13:45:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '8',
+      name: 'shopping_cart',
+      type: 'table',
+      records: 5678,
+      size: '12.7 MB',
+      lastModified: '2024-01-15 17:10:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '9',
+      name: 'payment_transactions',
+      type: 'table',
+      records: 23890,
+      size: '67.3 MB',
+      lastModified: '2024-01-15 16:30:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '10',
+      name: 'product_inventory',
+      type: 'table',
+      records: 8934,
+      size: '23.1 MB',
+      lastModified: '2024-01-15 14:50:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '11',
+      name: 'user_addresses',
+      type: 'table',
+      records: 18456,
+      size: '28.9 MB',
+      lastModified: '2024-01-15 12:40:00',
+      status: 'active',
+      engine: 'InnoDB'
+    },
+    {
+      id: '12',
       name: 'product_view',
       type: 'view',
-      records: 5678,
+      records: 8934,
       size: '0 MB',
       lastModified: '2024-01-14 09:30:00',
       status: 'active',
       engine: 'View'
     },
     {
-      id: '6',
+      id: '13',
+      name: 'order_summary_view',
+      type: 'view',
+      records: 34567,
+      size: '0 MB',
+      lastModified: '2024-01-14 10:15:00',
+      status: 'active',
+      engine: 'View'
+    },
+    {
+      id: '14',
       name: 'idx_user_email',
       type: 'index',
       records: 0,
-      size: '8.5 MB',
+      size: '12.3 MB',
       lastModified: '2024-01-13 15:45:00',
+      status: 'active',
+      engine: 'BTree'
+    },
+    {
+      id: '15',
+      name: 'idx_product_category',
+      type: 'index',
+      records: 0,
+      size: '8.7 MB',
+      lastModified: '2024-01-13 16:20:00',
+      status: 'active',
+      engine: 'BTree'
+    },
+    {
+      id: '16',
+      name: 'idx_order_date',
+      type: 'index',
+      records: 0,
+      size: '15.2 MB',
+      lastModified: '2024-01-13 14:30:00',
       status: 'active',
       engine: 'BTree'
     }
@@ -217,6 +344,61 @@ export function DatabaseTables() {
     setIsCreateDialogOpen(true)
   }
 
+  // Generate SQL Preview
+  const generateSqlPreview = () => {
+    if (!createForm.name.trim()) return 'CREATE TABLE table_name (\n  -- Add table name and columns\n);'
+    
+    let sql = `CREATE TABLE \`${createForm.name}\` (\n`
+    
+    // Add columns
+    const columnDefinitions = createForm.columns.map(col => {
+      if (!col.name.trim()) return '  -- Column name required'
+      
+      let definition = `  \`${col.name}\` ${col.type}`
+      
+      // Add length for applicable types
+      if (col.length && ['VARCHAR', 'CHAR', 'DECIMAL', 'NUMERIC', 'FLOAT', 'DOUBLE'].includes(col.type)) {
+        definition += `(${col.length})`
+      }
+      
+      // Add NOT NULL
+      if (!col.nullable) {
+        definition += ' NOT NULL'
+      }
+      
+      // Add AUTO_INCREMENT
+      if (col.isAutoIncrement) {
+        definition += ' AUTO_INCREMENT'
+      }
+      
+      // Add default value
+      if (col.defaultValue && col.defaultValue.trim()) {
+        definition += ` DEFAULT '${col.defaultValue}'`
+      }
+      
+      return definition
+    })
+    
+    sql += columnDefinitions.join(',\n')
+    
+    // Add primary key
+    const primaryKeys = createForm.columns.filter(col => col.isPrimaryKey)
+    if (primaryKeys.length > 0) {
+      sql += `,\n  PRIMARY KEY (${primaryKeys.map(col => `\`${col.name}\``).join(', ')})`
+    }
+    
+    sql += `\n) ENGINE=${createForm.engine}`
+    
+    // Add comment
+    if (createForm.comment.trim()) {
+      sql += ` COMMENT='${createForm.comment}'`
+    }
+    
+    sql += ';'
+    
+    return sql
+  }
+
   const addColumn = () => {
     const newColumn: TableColumn = {
       id: Date.now().toString(),
@@ -250,26 +432,58 @@ export function DatabaseTables() {
   }
 
   const handleSubmitCreateTable = () => {
-    // Validate form
+    // Enhanced validation
     if (!createForm.name.trim()) {
-      alert('Table name is required')
+      alert('Nama tabel wajib diisi')
       return
     }
-    
+
+    // Validate table name format (MySQL naming rules)
+    const tableNameRegex = /^[a-zA-Z_][a-zA-Z0-9_]*$/
+    if (!tableNameRegex.test(createForm.name)) {
+      alert('Nama tabel hanya boleh mengandung huruf, angka, dan underscore. Harus dimulai dengan huruf atau underscore.')
+      return
+    }
+
     if (createForm.columns.length === 0) {
-      alert('At least one column is required')
+      alert('Minimal satu kolom diperlukan')
       return
     }
 
-    // Check if all columns have names
-    const hasEmptyColumnNames = createForm.columns.some(col => !col.name.trim())
-    if (hasEmptyColumnNames) {
-      alert('All columns must have names')
+    // Check if all columns have valid names
+    const invalidColumns = createForm.columns.filter(col => !col.name.trim() || !/^[a-zA-Z_][a-zA-Z0-9_]*$/.test(col.name))
+    if (invalidColumns.length > 0) {
+      alert('Semua kolom harus memiliki nama yang valid (huruf, angka, underscore)')
       return
     }
 
-    // Here you would typically make an API call to create the table
+    // Check for duplicate column names
+    const columnNames = createForm.columns.map(col => col.name.toLowerCase())
+    const duplicates = columnNames.filter((name, index) => columnNames.indexOf(name) !== index)
+    if (duplicates.length > 0) {
+      alert('Nama kolom tidak boleh duplikat')
+      return
+    }
+
+    // Validate AUTO_INCREMENT columns
+    const autoIncrementCols = createForm.columns.filter(col => col.isAutoIncrement)
+    if (autoIncrementCols.length > 1) {
+      alert('Hanya satu kolom yang boleh memiliki AUTO_INCREMENT')
+      return
+    }
+
+    if (autoIncrementCols.length > 0 && !autoIncrementCols[0].isPrimaryKey) {
+      alert('Kolom AUTO_INCREMENT harus menjadi PRIMARY KEY')
+      return
+    }
+
+    // Log the create table data with SQL preview
+    const sqlPreview = generateSqlPreview()
     console.log('Creating table:', createForm)
+    console.log('SQL Preview:', sqlPreview)
+    
+    // Show success message
+    alert(`Tabel '${createForm.name}' berhasil dibuat!\n\nSQL yang dijalankan:\n${sqlPreview}`)
     
     // Reset form and close dialog
     setCreateForm({
@@ -286,6 +500,7 @@ export function DatabaseTables() {
         isAutoIncrement: true
       }]
     })
+    setShowSqlPreview(false)
     setIsCreateDialogOpen(false)
   }
 
@@ -519,10 +734,9 @@ export function DatabaseTables() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="InnoDB">InnoDB</SelectItem>
-                    <SelectItem value="MyISAM">MyISAM</SelectItem>
-                    <SelectItem value="MEMORY">MEMORY</SelectItem>
-                    <SelectItem value="CSV">CSV</SelectItem>
+                    {mysqlEngines.map(engine => (
+                      <SelectItem key={engine} value={engine}>{engine}</SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>
@@ -578,19 +792,9 @@ export function DatabaseTables() {
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="INT">INT</SelectItem>
-                            <SelectItem value="BIGINT">BIGINT</SelectItem>
-                            <SelectItem value="VARCHAR">VARCHAR</SelectItem>
-                            <SelectItem value="TEXT">TEXT</SelectItem>
-                            <SelectItem value="LONGTEXT">LONGTEXT</SelectItem>
-                            <SelectItem value="DECIMAL">DECIMAL</SelectItem>
-                            <SelectItem value="FLOAT">FLOAT</SelectItem>
-                            <SelectItem value="DOUBLE">DOUBLE</SelectItem>
-                            <SelectItem value="DATE">DATE</SelectItem>
-                            <SelectItem value="DATETIME">DATETIME</SelectItem>
-                            <SelectItem value="TIMESTAMP">TIMESTAMP</SelectItem>
-                            <SelectItem value="BOOLEAN">BOOLEAN</SelectItem>
-                            <SelectItem value="JSON">JSON</SelectItem>
+                            {mysqlDataTypes.map(dataType => (
+                              <SelectItem key={dataType} value={dataType}>{dataType}</SelectItem>
+                            ))}
                           </SelectContent>
                         </Select>
                       </div>
@@ -603,28 +807,25 @@ export function DatabaseTables() {
                         />
                       </div>
                       <div className="col-span-1 flex justify-center">
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           checked={column.nullable}
-                          onChange={(e) => updateColumn(column.id, 'nullable', e.target.checked)}
-                          className="h-4 w-4"
+                          onCheckedChange={(checked) => updateColumn(column.id, 'nullable', checked === true)}
+                          aria-label={`Allow NULL for ${column.name || 'column'}`}
                         />
                       </div>
                       <div className="col-span-1 flex justify-center">
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           checked={column.isPrimaryKey}
-                          onChange={(e) => updateColumn(column.id, 'isPrimaryKey', e.target.checked)}
-                          className="h-4 w-4"
+                          onCheckedChange={(checked) => updateColumn(column.id, 'isPrimaryKey', checked === true)}
+                          aria-label={`Primary key for ${column.name || 'column'}`}
                         />
                       </div>
                       <div className="col-span-1 flex justify-center">
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           checked={column.isAutoIncrement}
-                          onChange={(e) => updateColumn(column.id, 'isAutoIncrement', e.target.checked)}
-                          className="h-4 w-4"
+                          onCheckedChange={(checked) => updateColumn(column.id, 'isAutoIncrement', checked === true)}
                           disabled={!column.isPrimaryKey}
+                          aria-label={`Auto increment for ${column.name || 'column'}`}
                         />
                       </div>
                       <div className="col-span-3">
@@ -652,14 +853,43 @@ export function DatabaseTables() {
                 </div>
               </div>
             </div>
+            
+            {/* SQL Preview Section */}
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <Label className="text-base font-medium">SQL Preview</Label>
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => setShowSqlPreview(!showSqlPreview)}
+                >
+                  {showSqlPreview ? 'Hide SQL' : 'Show SQL'}
+                </Button>
+              </div>
+              
+              {showSqlPreview && (
+                <div className="border rounded-lg p-4 bg-muted/30">
+                  <pre className="text-sm font-mono whitespace-pre-wrap text-muted-foreground">
+                    {generateSqlPreview()}
+                  </pre>
+                </div>
+              )}
+            </div>
           </div>
           
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
-              Cancel
+            <Button type="button" variant="outline" onClick={() => {
+              setIsCreateDialogOpen(false)
+              setShowSqlPreview(false)
+            }}>
+              Batal
+            </Button>
+            <Button type="button" variant="outline" onClick={() => setShowSqlPreview(!showSqlPreview)}>
+              {showSqlPreview ? 'Sembunyikan SQL' : 'Preview SQL'}
             </Button>
             <Button type="button" onClick={handleSubmitCreateTable}>
-              Create Table
+              Buat Tabel
             </Button>
           </DialogFooter>
         </DialogContent>
