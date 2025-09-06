@@ -11,6 +11,7 @@ import {
   ChevronRight,
   HelpCircle,
   Code,
+  Bot,
 } from "lucide-react"
 
 import {
@@ -156,6 +157,20 @@ const menuItems = [
       {
         title: "Riwayat Transaksi",
         url: "/portal/api-tools/riwayat-transaksi",
+      },
+    ],
+  },
+  {
+    title: "AI Chat",
+    icon: Bot,
+    submenu: [
+      {
+        title: "Chat",
+        url: "/portal/ai-chat/chat",
+      },
+      {
+        title: "Riwayat Chat",
+        url: "/portal/ai-chat/riwayat",
       },
     ],
   },
