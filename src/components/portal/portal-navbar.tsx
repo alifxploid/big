@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { AnimatedThemeToggler } from "@/components/magicui/animated-theme-toggler"
+import Link from "next/link"
 
 export function PortalNavbar() {
   return (
@@ -23,12 +24,12 @@ export function PortalNavbar() {
         <div className="flex items-center gap-2">
           <SidebarTrigger className="md:hidden" />
           <div className="hidden md:flex">
-            <a className="mr-6 flex items-center space-x-2" href="/portal/dashboard">
+            <Link className="mr-6 flex items-center space-x-2" href="/portal/dashboard">
               <div className="h-8 w-8 rounded-lg bg-primary" />
               <span className="hidden font-bold text-lg sm:inline-block">
                 Portal
               </span>
-            </a>
+            </Link>
           </div>
         </div>
         

@@ -35,6 +35,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 
+import Link from "next/link"
+
 // Menu items dengan submenu
 const menuItems = [
   {
@@ -167,7 +169,7 @@ export function PortalSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton size="lg" asChild className="h-14 px-3 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors">
-                <a href="/portal/dashboard">
+                <Link href="/portal/dashboard">
                   <div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-primary-foreground/10">
                     <Home className="size-5" />
                   </div>
@@ -175,7 +177,7 @@ export function PortalSidebar() {
                     <span className="truncate font-bold text-lg">All-in-One</span>
                     <span className="truncate text-sm opacity-80">Platform</span>
                   </div>
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>
@@ -202,9 +204,9 @@ export function PortalSidebar() {
                             {item.submenu.map((subItem) => (
                               <SidebarMenuSubItem key={subItem.title}>
                                 <SidebarMenuSubButton asChild className="h-8 px-3 rounded-md hover:bg-accent/50 hover:text-accent-foreground transition-colors">
-                                  <a href={subItem.url}>
+                                  <Link href={subItem.url}>
                                     <span className="text-sm">{subItem.title}</span>
-                                  </a>
+                                  </Link>
                                 </SidebarMenuSubButton>
                               </SidebarMenuSubItem>
                             ))}
@@ -213,10 +215,10 @@ export function PortalSidebar() {
                       </Collapsible>
                     ) : (
                       <SidebarMenuButton asChild className="h-10 px-3 rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors font-medium">
-                        <a href={item.url}>
+                        <Link href={item.url}>
                           <item.icon className="size-4" />
                           <span>{item.title}</span>
-                        </a>
+                        </Link>
                       </SidebarMenuButton>
                     )}
                   </SidebarMenuItem>
@@ -234,10 +236,10 @@ export function PortalSidebar() {
               <SidebarMenu>
                 <SidebarMenuItem>
                   <SidebarMenuButton asChild className="h-10 px-3 rounded-lg hover:bg-accent hover:text-accent-foreground transition-colors font-medium">
-                    <a href="/portal/help">
-                      <HelpCircle className="size-4" />
-                      <span>Help Center</span>
-                    </a>
+                    <Link href="/portal/help" className="group flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground">
+                      <span className="h-2 w-2 rounded-full bg-muted-foreground" />
+                      <span>Bantuan</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               </SidebarMenu>
