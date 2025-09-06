@@ -2,10 +2,16 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import { 
+  validateAdminCredentials, 
+  createAdminSession, 
+  setAdminSessionCookie 
+} from '@/app/admin/lib/auth';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -24,6 +30,8 @@ type LoginFormData = z.infer<typeof loginSchema>;
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+  const router = useRouter();
 
   const {
     register,
@@ -35,12 +43,24 @@ export default function LoginPage() {
 
   const onSubmit = async (data: LoginFormData) => {
     setIsLoading(true);
+    setError('');
+    
     try {
-      // TODO: Implement login logic
-      console.log('Login data:', data);
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
+      const isValid = await validateAdminCredentials({
+        username: data.email, // Menggunakan email sebagai username
+        password: data.password
+      });
+      
+      if (isValid) {
+        const session = createAdminSession(data.email);
+        setAdminSessionCookie(session);
+        router.push('/portal/dashboard');
+      } else {
+        setError('Email atau password tidak valid');
+      }
     } catch (error) {
       console.error('Login error:', error);
+      setError('Terjadi kesalahan saat login. Silakan coba lagi.');
     } finally {
       setIsLoading(false);
     }
@@ -166,6 +186,12 @@ export default function LoginPage() {
                     Lupa password?
                   </Link>
                 </div>
+
+                {error && (
+                  <div className="p-3 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md">
+                    {error}
+                  </div>
+                )}
 
                 <ShimmerButton
                   type="submit"
