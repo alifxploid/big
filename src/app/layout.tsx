@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, Creepster } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { LoadingProvider } from "@/components/providers/loading-provider";
+import { LiveChatIcon } from "@/components/shared/live-chat";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ export default function RootLayout({
         >
           <LoadingProvider>
             {children}
+            <LiveChatIcon />
           </LoadingProvider>
         </ThemeProvider>
       </body>
