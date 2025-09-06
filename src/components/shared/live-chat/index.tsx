@@ -1,1 +1,0 @@
-export { LiveChatIcon } from './live-chat-icon'

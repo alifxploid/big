@@ -1,145 +1,137 @@
 'use client'
 
-import React, { useState } from 'react'
-import { MessageCircle, X, Send, User } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { MessageCircle } from 'lucide-react'
+import CategorySelector from './category-selector'
+import ContactForm, { ContactFormData } from './contact-form'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
 interface LiveChatIconProps {
   className?: string
 }
 
-export function LiveChatIcon({ className }: LiveChatIconProps) {
-  const [isOpen, setIsOpen] = useState(false)
-  const [message, setMessage] = useState('')
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [isOnline] = useState(true)
+type ChatStep = 'closed' | 'category' | 'form' | 'chat'
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!message.trim() || !name.trim() || !email.trim()) return
+export default function LiveChatIcon({ className = '' }: LiveChatIconProps) {
+  const router = useRouter()
+  const [currentStep, setCurrentStep] = useState<ChatStep>('closed')
+  const [selectedCategory, setSelectedCategory] = useState<string>('')
+  const [isOnline] = useState(true)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  if (!isMounted) {
+    return null
+  }
+
+  const handleCategorySelect = (category: string) => {
+    setSelectedCategory(category)
+    setCurrentStep('form')
+  }
+
+  const handleFormSubmit = (formData: ContactFormData) => {
+    // Generate session ID using crypto.randomUUID for better consistency
+    const sessionId = `chat_${crypto.randomUUID().replace(/-/g, '')}`
     
-    // Simulasi kirim pesan
-    console.log('Pesan dikirim:', { name, email, message })
-    setMessage('')
-    // Reset form atau lakukan aksi lainnya
+    // Store chat data in localStorage for the chat page
+    localStorage.setItem(`chat_${sessionId}`, JSON.stringify({
+      ...formData,
+      sessionId,
+      startTime: new Date().toISOString()
+    }))
+    
+    // Navigate to chat page
+    router.push(`/chat/${sessionId}`)
+  }
+
+  const handleClose = () => {
+    setCurrentStep('closed')
+    setSelectedCategory('')
   }
 
   return (
     <>
       {/* Floating Chat Button */}
-      <div className={cn(
-        "fixed bottom-6 right-6 z-50",
-        className
-      )}>
-        <Button
-          onClick={() => setIsOpen(!isOpen)}
-          size="lg"
-          className={cn(
-            "h-14 w-14 rounded-full shadow-2xl transition-all duration-300 hover:scale-110",
-            "bg-gradient-to-r from-gray-900 to-black hover:from-gray-800 hover:to-gray-900",
-            "border-2 border-gray-700/50 backdrop-blur-sm ring-1 ring-white/10",
-            isOpen && "rotate-180"
-          )}
+      <div className={cn('fixed bottom-4 right-4 z-50 sm:bottom-6 sm:right-6', className)}>
+        <button
+          onClick={() => setCurrentStep(currentStep === 'closed' ? 'category' : 'closed')}
+          className="group relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 hover:from-slate-800 hover:via-slate-700 hover:to-slate-800 text-white p-3 sm:p-4 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-slate-400/50 border border-slate-700/50 hover:border-slate-500/50 backdrop-blur-sm"
+          aria-label={currentStep === 'closed' ? 'Buka Live Chat' : 'Tutup Live Chat'}
         >
-          {isOpen ? (
-            <X className="h-6 w-6 text-white" />
-          ) : (
-            <MessageCircle className="h-6 w-6 text-white" />
+          <MessageCircle className="w-5 h-5 sm:w-6 sm:h-6" />
+          
+          {/* Online Badge */}
+          {isOnline && (
+            <div className="absolute -top-1 -right-1 w-3 h-3 sm:w-4 sm:h-4 bg-emerald-500 border-2 border-white rounded-full animate-pulse shadow-sm" />
           )}
-        </Button>
-        
-        {/* Online Status Badge */}
-        {isOnline && !isOpen && (
-          <Badge 
-            variant="secondary" 
-            className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-red-500 p-0 animate-pulse ring-2 ring-black"
-          >
-            <span className="sr-only">Online</span>
-          </Badge>
-        )}
+          
+          {/* Tooltip */}
+          <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-slate-900/95 text-white text-xs sm:text-sm rounded-xl opacity-0 group-hover:opacity-100 transition-all duration-300 whitespace-nowrap border border-slate-700/50 backdrop-blur-sm shadow-lg">
+            💬 Butuh bantuan? Chat dengan kami!
+            <div className="absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-slate-900/95"></div>
+          </div>
+        </button>
       </div>
 
-      {/* Chat Window */}
-      {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-80 max-w-[calc(100vw-3rem)]">
-          <Card className="shadow-2xl border border-gray-800/50 bg-gray-900/95 backdrop-blur-md ring-1 ring-white/10">
-            <CardHeader className="pb-3">
+      {/* Category Selection */}
+      {currentStep === 'category' && (
+        <div className="fixed bottom-24 right-4 z-40 w-[calc(100vw-2rem)] max-w-sm sm:bottom-28 sm:right-6 sm:w-96 animate-in slide-in-from-bottom-4 fade-in duration-300">
+          <Card className="shadow-2xl border border-slate-800/60 bg-slate-900/95 backdrop-blur-xl ring-1 ring-slate-700/30 animate-in zoom-in-95 duration-300">
+            <CardHeader className="pb-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="h-3 w-3 rounded-full bg-red-500 animate-pulse" />
-                  <CardTitle className="text-lg text-white">Live Support</CardTitle>
-                </div>
-                <Badge variant="outline" className="text-xs border-red-500/50 text-red-400">
-                  Online
-                </Badge>
+                <CardTitle className="text-lg font-semibold text-white">Pilih Kategori</CardTitle>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClose}
+                  className="h-8 w-8 p-0 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors"
+                >
+                  ×
+                </Button>
               </div>
-              <p className="text-sm text-gray-400">
-                Tim expert kami siap membantu Anda
-              </p>
             </CardHeader>
-            
-            <CardContent className="space-y-4">
-              {/* Chat Messages Area */}
-              <div className="h-32 rounded-lg bg-black/50 border border-gray-800/50 p-3 overflow-y-auto">
-                <div className="flex items-start gap-2 mb-3">
-                  <div className="h-6 w-6 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
-                    <User className="h-3 w-3 text-white" />
-                  </div>
-                  <div className="bg-gray-800 border border-gray-700/50 rounded-lg p-2 text-sm shadow-sm text-gray-200">
-                    Halo! Ada yang bisa kami bantu hari ini?
-                  </div>
+            <CardContent className="pt-0">
+              <CategorySelector
+                onSelect={handleCategorySelect}
+                onClose={handleClose}
+              />
+            </CardContent>
+          </Card>
+        </div>
+      )}
+
+      {/* Contact Form */}
+      {currentStep === 'form' && (
+        <div className="fixed bottom-24 right-4 z-40 w-[calc(100vw-2rem)] max-w-sm sm:bottom-28 sm:right-6 sm:w-96 animate-in slide-in-from-bottom-4 fade-in duration-300">
+          <Card className="shadow-2xl border border-slate-800/60 bg-slate-900/95 backdrop-blur-xl ring-1 ring-slate-700/30 animate-in zoom-in-95 duration-300">
+            <CardHeader className="pb-4">
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-lg font-semibold text-white">Informasi Kontak</CardTitle>
+                  <p className="text-sm text-slate-400 capitalize">{selectedCategory}</p>
                 </div>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClose}
+                  className="h-8 w-8 p-0 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors"
+                >
+                  ×
+                </Button>
               </div>
-              
-              {/* Contact Form */}
-              <form onSubmit={handleSubmit} className="space-y-3">
-                <div className="grid grid-cols-2 gap-2">
-                  <Input
-                    placeholder="Nama"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="text-sm"
-                    required
-                  />
-                  <Input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="text-sm"
-                    required
-                  />
-                </div>
-                
-                <div className="flex gap-2">
-                  <Textarea
-                    placeholder="Tulis pesan Anda..."
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    className="text-sm resize-none"
-                    rows={2}
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    size="sm"
-                    className="self-end h-10 w-10 p-0 bg-red-600 hover:bg-red-700 border border-red-500/50"
-                    disabled={!message.trim() || !name.trim() || !email.trim()}
-                  >
-                    <Send className="h-4 w-4" />
-                  </Button>
-                </div>
-              </form>
-              
-              <p className="text-xs text-gray-500 text-center">
-                Response time: {'<'} 2 menit
-              </p>
+            </CardHeader>
+            <CardContent className="pt-0">
+              <ContactForm
+                selectedCategory={selectedCategory}
+                onSubmit={handleFormSubmit}
+                onBack={() => setCurrentStep('category')}
+              />
             </CardContent>
           </Card>
         </div>
