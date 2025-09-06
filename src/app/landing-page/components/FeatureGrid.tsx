@@ -3,7 +3,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ShimmerButton } from '@/components/magicui/shimmer-button'
-import { Shield, TrendingUp, Smartphone, ArrowRight, CheckCircle } from 'lucide-react'
+import { Shield, TrendingUp, Smartphone, Brain, ArrowRight, CheckCircle } from 'lucide-react'
 
 const features = [
   {
@@ -50,6 +50,21 @@ const features = [
       'Tagihan TV & Internet'
     ],
     cta: 'Top Up Sekarang'
+  },
+  {
+    icon: Brain,
+    title: 'AI Assistant',
+    description: 'Asisten AI cerdas untuk membantu bisnis dan produktivitas Anda',
+    badge: 'Terbaru',
+    badgeVariant: 'destructive' as const,
+    features: [
+      'AI Chat Assistant 24/7',
+      'Content Generator otomatis',
+      'Business Analytics AI',
+      'Customer Support AI',
+      'Workflow Automation'
+    ],
+    cta: 'Coba AI Sekarang'
   }
 ]
 
@@ -59,14 +74,14 @@ export default function FeatureGrid() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight text-neutral-900 dark:text-white sm:text-4xl">
-            Tiga Layanan Utama
+            Empat Layanan Utama
           </h2>
           <p className="mt-4 text-lg leading-8 text-neutral-600 dark:text-neutral-300">
-            Platform all-in-one yang menggabungkan keamanan rekber, kekuatan SMM, dan kemudahan PPOB
+            Platform all-in-one yang menggabungkan keamanan rekber, kekuatan SMM, kemudahan PPOB, dan kecerdasan AI
           </p>
         </div>
         
-        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-8 lg:mx-0 lg:max-w-none md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4">
           {features.map((feature, index) => {
             const IconComponent = feature.icon
             return (

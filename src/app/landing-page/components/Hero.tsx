@@ -82,7 +82,7 @@ export default function Hero() {
                 </TypingAnimation>
                 <p
                   className="mx-auto mt-8 max-w-2xl text-balance text-lg">
-                  Solusi lengkap untuk rekening bersama, social media marketing, dan PPOB. Tingkatkan bisnis Anda dengan platform yang aman, cepat, dan terpercaya.
+                  Solusi lengkap untuk rekening bersama, social media marketing, PPOB, dan AI assistant. Tingkatkan bisnis Anda dengan platform yang aman, cepat, dan terpercaya.
                 </p>
               </AnimatedGroup>
 
