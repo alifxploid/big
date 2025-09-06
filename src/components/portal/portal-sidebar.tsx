@@ -3,18 +3,14 @@
 import {
   Home,
   ShoppingCart,
-  ShoppingBag,
   Shield,
   Smartphone,
   Zap,
   Share2,
   CreditCard,
-  FileText,
-  History,
-  RefreshCw,
-  BarChart3,
   ChevronRight,
   HelpCircle,
+  Code,
 } from "lucide-react"
 
 import {
@@ -144,6 +140,20 @@ const menuItems = [
       {
         title: "Riwayat Transaksi",
         url: "/portal/payment-gateway/riwayat-transaksi",
+      },
+    ],
+  },
+  {
+    title: "API Tools",
+    icon: Code,
+    submenu: [
+      {
+        title: "Order",
+        url: "/portal/api-tools/order",
+      },
+      {
+        title: "Riwayat Transaksi",
+        url: "/portal/api-tools/riwayat-transaksi",
       },
     ],
   },

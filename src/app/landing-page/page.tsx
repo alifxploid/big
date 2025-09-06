@@ -10,6 +10,7 @@ import HowItWorks from './components/HowItWorks'
 import BeamSection from './components/BeamSection'
 import PaymentGateway from './components/PaymentGateway'
 import CTASection from './components/CTASection'
+import FAQSection from './components/FAQSection'
 import Footer from './components/Footer'
 
 export default function LandingPage() {
@@ -36,6 +37,7 @@ export default function LandingPage() {
         <BeamSection />
         <PaymentGateway />
         <CTASection />
+        <FAQSection />
       </main>
       
       <Footer />

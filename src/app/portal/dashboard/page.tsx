@@ -137,8 +137,8 @@ export default function PortalDashboard() {
       </div>
 
       {/* Main Content */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
-        <Card className="col-span-4">
+      <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
+        <Card className="md:col-span-1 lg:col-span-4">
           <CardHeader>
             <CardTitle>Overview</CardTitle>
             <CardDescription>
@@ -172,7 +172,7 @@ export default function PortalDashboard() {
           </CardContent>
         </Card>
 
-        <Card className="col-span-3">
+        <Card className="md:col-span-1 lg:col-span-3">
           <CardHeader>
             <CardTitle>Recent Activity</CardTitle>
             <CardDescription>
