@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { ShimmerButton } from '@/components/magicui/shimmer-button'
+import { Marquee } from '@/components/magicui/marquee'
 import { 
   CreditCard, 
   Smartphone, 
@@ -157,19 +158,33 @@ export default function PaymentGateway() {
             Dipercaya oleh 50,000+ pengguna aktif
           </p>
           
-          <div className="flex justify-center items-center space-x-8 opacity-60">
-            <Badge variant="outline" className="text-xs">
-              PCI DSS Certified
-            </Badge>
-            <Badge variant="outline" className="text-xs">
-              SSL Secured
-            </Badge>
-            <Badge variant="outline" className="text-xs">
-              ISO 27001
-            </Badge>
-            <Badge variant="outline" className="text-xs">
-              Bank Grade Security
-            </Badge>
+          <div className="relative w-full">
+            <Marquee className="[--duration:20s]" pauseOnHover={true}>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                PCI DSS Certified
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                SSL Secured
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                ISO 27001
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                Bank Grade Security
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                256-bit Encryption
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                GDPR Compliant
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                Real-time Monitoring
+              </Badge>
+              <Badge variant="outline" className="text-xs whitespace-nowrap mx-4">
+                Fraud Protection
+              </Badge>
+            </Marquee>
           </div>
         </div>
       </div>

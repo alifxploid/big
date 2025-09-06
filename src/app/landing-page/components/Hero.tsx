@@ -40,9 +40,9 @@ const transitionVariants = {
 
 export default function Hero() {
   return (
-    <main className="relative overflow-hidden min-h-screen bg-white dark:bg-neutral-950">
+    <main className="relative overflow-hidden min-h-screen bg-white dark:bg-neutral-950 w-full">
       {/* Background Paths */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <BackgroundPaths title="" showContent={false} />
       </div>
       

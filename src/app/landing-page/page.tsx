@@ -25,11 +25,11 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-neutral-950">
+    <div className="min-h-screen bg-white dark:bg-neutral-950 overflow-x-hidden">
       <Navbar onMobileMenuToggle={handleMobileMenuToggle} />
 
       
-      <main>
+      <main className="overflow-x-hidden">
         <Hero />
         <FeatureGrid />
         <ServicesSection />

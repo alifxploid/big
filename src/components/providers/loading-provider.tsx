@@ -24,17 +24,25 @@ interface LoadingProviderProps {
 }
 
 export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) => {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(true) // Start with loading true for initial load
+  const [isInitialLoad, setIsInitialLoad] = useState(true)
   const pathname = usePathname()
   const [previousPathname, setPreviousPathname] = useState(pathname)
 
   useEffect(() => {
+    // Handle initial page load
+    if (isInitialLoad) {
+      setIsInitialLoad(false)
+      // Keep loading true, will be handled by the timer effect
+      return
+    }
+    
     // Jika pathname berubah dan bukan anchor link
     if (pathname !== previousPathname && !pathname.includes('#')) {
       setIsLoading(true)
       setPreviousPathname(pathname)
     }
-  }, [pathname, previousPathname])
+  }, [pathname, previousPathname, isInitialLoad])
 
   useEffect(() => {
     // Reset loading setelah halaman dimuat
@@ -56,7 +64,7 @@ export const LoadingProvider: React.FC<LoadingProviderProps> = ({ children }) =>
       {children}
       {isLoading && (
         <AILoader 
-          size={180} 
+          size={100} 
           text="Loading" 
         />
       )}

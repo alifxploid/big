@@ -19,11 +19,12 @@ function FloatingPaths({ position, prefersReducedMotion = false }: { position: n
     }));
 
     return (
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <svg
                 className="w-full h-full text-slate-950 dark:text-white"
                 viewBox="0 0 696 316"
                 fill="none"
+                preserveAspectRatio="xMidYMid slice"
             >
                 <title>Background Paths</title>
                 {paths.map((path) => (
@@ -68,7 +69,7 @@ export function BackgroundPaths({
 
     return (
         <div className={`relative ${showContent ? 'min-h-screen w-full flex items-center justify-center' : 'w-full h-full'} overflow-hidden ${showContent ? 'bg-white dark:bg-neutral-950' : ''}`}>
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 overflow-hidden">
                 <FloatingPaths position={1} prefersReducedMotion={prefersReducedMotion} />
                 <FloatingPaths position={-1} prefersReducedMotion={prefersReducedMotion} />
             </div>

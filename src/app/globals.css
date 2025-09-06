@@ -208,3 +208,28 @@
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Mobile optimization - balanced performance settings */
+@media (max-width: 768px) {
+  /* Enable hardware acceleration for view transitions */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+  
+  /* Optimize theme toggle button for mobile */
+  button[aria-label*="theme"] {
+    will-change: transform;
+    transform: translateZ(0);
+    transition: transform 0.3s ease-out;
+  }
+  
+  /* Reduce motion for heavy animations but keep essential ones */
+  .animate-spin,
+  .animate-pulse,
+  .animate-bounce {
+    animation-duration: 0.5s;
+  }
+}
